@@ -10,721 +10,824 @@
       --sage: #4a6741;
       --sage-light: #e8f0e6;
       --sage-mid: #8aab85;
-      --stone: #8c8578;
-      --stone-light: #f5f3ef;
       --cream: #faf8f4;
       --ink: #2a2721;
       --ink-mid: #5a574f;
-      --gold: #b89a5e;
-      --color-background-primary: #ffffff;
-      --color-background-secondary: #f9f7f4;
-      --color-text-primary: #2a2721;
-      --color-text-secondary: #5a574f;
-      --color-border-tertiary: #e5e2dc;
-      --border-radius-md: 8px;
-      --border-radius-lg: 12px;
+      --border: #e5e2dc;
+      --bg: #f5f2ed;
+      --radius-md: 10px;
+      --radius-lg: 16px;
     }
- 
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
- 
+    html { scroll-behavior: smooth; }
+
     body {
-      background: #f0ede8;
-      min-height: 100vh;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding: 2rem 1rem;
       font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 17px;
+      line-height: 1.7;
     }
- 
-    .card {
-      background: white;
-      border-radius: 16px;
-      width: 100%;
-      max-width: 580px;
-      box-shadow: 0 4px 32px rgba(0,0,0,0.08);
-      overflow: hidden;
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 0.5px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem; height: 64px;
     }
- 
-    .header {
-      padding: 2rem 2rem 1.5rem;
-      border-bottom: 0.5px solid var(--color-border-tertiary);
-    }
- 
-    .header-eyebrow {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--sage);
-      margin-bottom: 0.5rem;
-    }
- 
-    .header h1 {
+    .nav-logo {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 28px;
-      font-weight: 300;
-      color: var(--color-text-primary);
-      line-height: 1.2;
+      font-size: 22px; font-weight: 400;
+      color: var(--ink); text-decoration: none; cursor: pointer;
     }
- 
-    .header p {
-      font-size: 14px;
-      color: var(--color-text-secondary);
-      margin-top: 0.4rem;
-      line-height: 1.6;
+    .nav-logo span { color: var(--sage); }
+    .nav-links { display: flex; align-items: center; gap: 2rem; }
+    .nav-links a {
+      font-size: 15px; color: var(--ink-mid);
+      text-decoration: none; cursor: pointer; transition: color 0.15s;
     }
- 
+    .nav-links a:hover { color: var(--sage); }
+    .nav-cta {
+      font-size: 14px !important; font-weight: 500 !important;
+      color: white !important; background: var(--sage);
+      padding: 9px 20px; border-radius: var(--radius-md);
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* PAGES */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* BUTTONS */
+    .btn-primary {
+      font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 500;
+      color: white; background: var(--sage); border: none;
+      border-radius: var(--radius-md); padding: 14px 32px;
+      cursor: pointer; transition: opacity 0.15s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-primary:hover { opacity: 0.87; }
+    .btn-secondary {
+      font-family: 'DM Sans', sans-serif; font-size: 16px;
+      color: var(--ink-mid); background: white;
+      border: 0.5px solid var(--border); border-radius: var(--radius-md);
+      padding: 14px 32px; cursor: pointer; transition: border-color 0.15s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-secondary:hover { border-color: var(--sage-mid); }
+
+    /* HOME */
+    .hero {
+      min-height: calc(100vh - 64px);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 5rem 2rem 4rem;
+      background: linear-gradient(160deg, #f9f7f3 0%, #eef0ea 100%);
+    }
+    .hero-eyebrow {
+      font-size: 13px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--sage); margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(42px, 7vw, 72px); font-weight: 300;
+      line-height: 1.1; color: var(--ink);
+      max-width: 800px; margin-bottom: 1.5rem;
+    }
+    .hero h1 em { font-style: italic; color: var(--sage); }
+    .hero-sub {
+      font-size: 19px; color: var(--ink-mid);
+      max-width: 540px; line-height: 1.7; margin-bottom: 2.5rem;
+    }
+    .hero-actions {
+      display: flex; gap: 1rem;
+      flex-wrap: wrap; justify-content: center;
+    }
+    .trust-row {
+      display: flex; gap: 2.5rem; justify-content: center;
+      flex-wrap: wrap; margin-top: 4rem; padding-top: 3rem;
+      border-top: 0.5px solid var(--border);
+      width: 100%; max-width: 700px;
+    }
+    .trust-item { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+    .trust-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px; font-weight: 300; color: var(--sage);
+    }
+    .trust-label { font-size: 14px; color: var(--ink-mid); text-align: center; }
+
+    .promise-strip {
+      background: white;
+      border-top: 0.5px solid var(--border);
+      border-bottom: 0.5px solid var(--border);
+      padding: 4rem 2rem;
+    }
+    .promise-inner {
+      max-width: 960px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2.5rem;
+    }
+    .promise-item { display: flex; flex-direction: column; gap: 0.6rem; }
+    .promise-icon { font-size: 26px; margin-bottom: 0.25rem; }
+    .promise-title { font-size: 18px; font-weight: 500; color: var(--ink); }
+    .promise-desc { font-size: 16px; color: var(--ink-mid); line-height: 1.65; }
+
+    /* HOW IT WORKS */
+    .section { max-width: 860px; margin: 0 auto; padding: 5rem 2rem; }
+    .section-eyebrow {
+      font-size: 13px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--sage); margin-bottom: 1rem;
+    }
+    .section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 5vw, 48px); font-weight: 300;
+      line-height: 1.2; color: var(--ink); margin-bottom: 1rem;
+    }
+    .section-intro {
+      font-size: 19px; color: var(--ink-mid);
+      max-width: 600px; line-height: 1.7; margin-bottom: 3.5rem;
+    }
+    .step-row {
+      display: grid; grid-template-columns: 72px 1fr;
+      gap: 2rem; padding: 2.5rem 0;
+      border-bottom: 0.5px solid var(--border);
+      align-items: flex-start;
+    }
+    .step-row:last-of-type { border-bottom: none; }
+    .step-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 52px; font-weight: 300;
+      color: var(--sage-mid); line-height: 1; padding-top: 4px;
+    }
+    .step-content h3 { font-size: 21px; font-weight: 500; color: var(--ink); margin-bottom: 0.5rem; }
+    .step-content p { font-size: 16px; color: var(--ink-mid); line-height: 1.75; }
+    .hiw-cta {
+      margin-top: 3.5rem; padding: 2.5rem;
+      background: var(--sage-light); border-radius: var(--radius-lg);
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 1.5rem; flex-wrap: wrap;
+    }
+    .hiw-cta-text h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px; font-weight: 400; color: var(--ink); margin-bottom: 0.3rem;
+    }
+    .hiw-cta-text p { font-size: 16px; color: var(--ink-mid); }
+
+    /* FORM */
+    .form-page-wrap {
+      min-height: calc(100vh - 64px); background: var(--bg);
+      display: flex; align-items: flex-start;
+      justify-content: center; padding: 3rem 1.5rem 5rem;
+    }
+    .form-card {
+      background: white; border-radius: var(--radius-lg);
+      width: 100%; max-width: 620px;
+      box-shadow: 0 4px 40px rgba(0,0,0,0.07); overflow: hidden;
+    }
+    .form-header {
+      padding: 2.5rem 2.5rem 2rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+    .form-eyebrow {
+      font-size: 12px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--sage); margin-bottom: 0.6rem;
+    }
+    .form-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 34px; font-weight: 300; color: var(--ink); line-height: 1.2;
+    }
+    .form-header p { font-size: 16px; color: var(--ink-mid); margin-top: 0.5rem; line-height: 1.6; }
     .progress-bar {
-      display: flex;
-      gap: 4px;
-      padding: 1rem 2rem;
-      border-bottom: 0.5px solid var(--color-border-tertiary);
+      display: flex; gap: 4px;
+      padding: 1.25rem 2.5rem; border-bottom: 0.5px solid var(--border);
       align-items: center;
     }
- 
     .progress-step {
-      height: 3px;
-      flex: 1;
-      background: var(--color-border-tertiary);
-      border-radius: 2px;
-      transition: background 0.3s;
+      height: 3px; flex: 1; background: var(--border);
+      border-radius: 2px; transition: background 0.3s;
     }
- 
     .progress-step.active { background: var(--sage); }
     .progress-step.done { background: var(--sage-mid); }
- 
-    .progress-label {
-      font-size: 12px;
-      color: var(--color-text-secondary);
-      margin-left: 8px;
-      white-space: nowrap;
-    }
- 
-    .step-body { padding: 1.5rem 2rem 1rem; }
- 
+    .progress-label { font-size: 13px; color: var(--ink-mid); margin-left: 10px; white-space: nowrap; }
+    .step-body { padding: 2rem 2.5rem 1rem; }
     .step-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 20px;
-      font-weight: 400;
-      color: var(--color-text-primary);
-      margin-bottom: 0.3rem;
+      font-size: 26px; font-weight: 400; color: var(--ink); margin-bottom: 0.3rem;
     }
- 
-    .step-sub {
-      font-size: 13px;
-      color: var(--color-text-secondary);
-      margin-bottom: 1.25rem;
-      line-height: 1.5;
-    }
- 
+    .step-sub { font-size: 16px; color: var(--ink-mid); margin-bottom: 1.5rem; line-height: 1.6; }
     .field-label {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--color-text-secondary);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 0.4rem;
-      margin-top: 1rem;
-      display: block;
+      font-size: 13px; font-weight: 500; color: var(--ink-mid);
+      text-transform: uppercase; letter-spacing: 0.06em;
+      margin-bottom: 0.5rem; margin-top: 1.25rem; display: block;
     }
- 
     .field-label:first-of-type { margin-top: 0; }
- 
     input[type="text"], input[type="email"], input[type="tel"], textarea {
-      width: 100%;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      padding: 10px 12px;
-      border: 0.5px solid var(--color-border-tertiary);
-      border-radius: var(--border-radius-md);
-      background: var(--color-background-primary);
-      color: var(--color-text-primary);
-      outline: none;
-      transition: border-color 0.15s;
+      width: 100%; font-family: 'DM Sans', sans-serif; font-size: 16px;
+      padding: 13px 15px; border: 0.5px solid var(--border);
+      border-radius: var(--radius-md); background: white; color: var(--ink);
+      outline: none; transition: border-color 0.15s;
     }
- 
     input:focus, textarea:focus { border-color: var(--sage-mid); }
- 
-    textarea {
-      resize: vertical;
-      min-height: 80px;
-    }
- 
+    textarea { resize: vertical; min-height: 90px; }
     .option-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      gap: 8px;
-      margin-top: 0.4rem;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+      gap: 10px; margin-top: 0.5rem;
     }
- 
     .option-card {
-      border: 0.5px solid var(--color-border-tertiary);
-      border-radius: var(--border-radius-md);
-      padding: 10px 12px;
-      cursor: pointer;
-      transition: all 0.15s;
-      background: var(--color-background-primary);
+      border: 0.5px solid var(--border); border-radius: var(--radius-md);
+      padding: 13px 15px; cursor: pointer; transition: all 0.15s; background: white;
     }
- 
-    .option-card:hover {
-      border-color: var(--sage-mid);
-      background: var(--color-background-secondary);
-    }
- 
-    .option-card.selected {
-      border-color: var(--sage);
-      border-width: 1.5px;
-      background: var(--sage-light);
-    }
- 
-    .option-label {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--color-text-primary);
-    }
- 
-    .option-desc {
-      font-size: 11px;
-      color: var(--color-text-secondary);
-      margin-top: 2px;
-      line-height: 1.4;
-    }
- 
+    .option-card:hover { border-color: var(--sage-mid); background: #f9faf8; }
+    .option-card.selected { border-color: var(--sage); border-width: 1.5px; background: var(--sage-light); }
+    .option-label { font-size: 15px; font-weight: 500; color: var(--ink); }
+    .option-desc { font-size: 13px; color: var(--ink-mid); margin-top: 3px; line-height: 1.4; }
     .nav-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem 1.5rem;
-      border-top: 0.5px solid var(--color-border-tertiary);
-      margin-top: 1rem;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.25rem 2.5rem 2rem; border-top: 0.5px solid var(--border); margin-top: 1.25rem;
     }
- 
     .btn-back {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      color: var(--color-text-secondary);
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 8px 0;
+      font-family: 'DM Sans', sans-serif; font-size: 15px;
+      color: var(--ink-mid); background: none; border: none; cursor: pointer; padding: 8px 0;
     }
- 
     .btn-next {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      color: white;
-      background: var(--sage);
-      border: none;
-      border-radius: var(--border-radius-md);
-      padding: 10px 24px;
-      cursor: pointer;
-      transition: opacity 0.15s;
+      font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500;
+      color: white; background: var(--sage); border: none;
+      border-radius: var(--radius-md); padding: 13px 28px; cursor: pointer; transition: opacity 0.15s;
     }
- 
-    .btn-next:hover { opacity: 0.88; }
- 
-    .loading-state {
-      text-align: center;
-      padding: 3rem 2rem;
-    }
- 
-    .loading-dots {
-      display: flex;
-      justify-content: center;
-      gap: 6px;
-      margin-bottom: 1rem;
-    }
- 
+    .btn-next:hover { opacity: 0.87; }
+
+    /* Loading */
+    .loading-state { text-align: center; padding: 4rem 2rem; }
+    .loading-dots { display: flex; justify-content: center; gap: 8px; margin-bottom: 1.25rem; }
     .dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--sage-mid);
-      animation: pulse 1.2s ease-in-out infinite;
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--sage-mid); animation: pulse 1.2s ease-in-out infinite;
     }
     .dot:nth-child(2) { animation-delay: 0.2s; }
     .dot:nth-child(3) { animation-delay: 0.4s; }
- 
     @keyframes pulse {
-      0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
-      40% { opacity: 1; transform: scale(1); }
+      0%,80%,100% { opacity:0.3; transform:scale(0.8); }
+      40% { opacity:1; transform:scale(1); }
     }
- 
     .loading-text {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 18px;
-      font-weight: 300;
-      color: var(--color-text-secondary);
+      font-size: 22px; font-weight: 300; color: var(--ink-mid);
     }
- 
-    .result-wrap { padding: 1.5rem 2rem; }
- 
+
+    /* Results */
+    .result-wrap { padding: 2rem 2.5rem; }
     .result-intro {
-      font-size: 13px;
-      color: var(--color-text-secondary);
-      line-height: 1.7;
-      margin-bottom: 1.5rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 0.5px solid var(--color-border-tertiary);
+      font-size: 17px; color: var(--ink-mid); line-height: 1.8;
+      margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 0.5px solid var(--border);
     }
- 
     .match-card {
-      border: 0.5px solid var(--color-border-tertiary);
-      border-radius: var(--border-radius-lg);
-      padding: 1rem 1.25rem;
-      margin-bottom: 12px;
+      border: 0.5px solid var(--border); border-radius: var(--radius-lg);
+      padding: 1.35rem 1.5rem; margin-bottom: 14px;
     }
- 
-    .match-card.top-pick {
-      border-color: var(--sage);
-      border-width: 1.5px;
-    }
- 
-    .match-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 8px;
-    }
- 
-    .match-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 17px;
-      font-weight: 400;
-      color: var(--color-text-primary);
-    }
- 
-    .match-type {
-      font-size: 11px;
-      color: var(--color-text-secondary);
-      margin-top: 2px;
-    }
- 
+    .match-card.top-pick { border-color: var(--sage); border-width: 1.5px; }
+    .match-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+    .match-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: var(--ink); }
+    .match-type { font-size: 13px; color: var(--ink-mid); margin-top: 2px; }
     .best-badge {
-      font-size: 10px;
-      font-weight: 500;
-      background: var(--sage-light);
-      color: var(--sage);
-      padding: 3px 8px;
-      border-radius: 20px;
-      white-space: nowrap;
+      font-size: 11px; font-weight: 500; background: var(--sage-light);
+      color: var(--sage); padding: 4px 10px; border-radius: 20px; white-space: nowrap;
     }
- 
-    .match-details {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-bottom: 10px;
-    }
- 
-    .detail-item { font-size: 11px; color: var(--color-text-secondary); }
- 
-    .detail-value {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--color-text-primary);
-      margin-top: 1px;
-    }
- 
-    .match-note {
-      font-size: 12px;
-      color: var(--color-text-secondary);
-      line-height: 1.5;
-      padding-top: 8px;
-      border-top: 0.5px solid var(--color-border-tertiary);
-    }
- 
-    .match-actions {
-      display: flex;
-      gap: 8px;
-      margin-top: 10px;
-    }
- 
+    .match-details { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
+    .detail-item { font-size: 12px; color: var(--ink-mid); }
+    .detail-value { font-size: 15px; font-weight: 500; color: var(--ink); margin-top: 2px; }
+    .match-note { font-size: 14px; color: var(--ink-mid); line-height: 1.65; padding-top: 10px; border-top: 0.5px solid var(--border); }
+    .match-actions { display: flex; gap: 10px; margin-top: 12px; }
     .btn-contact {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12px;
-      font-weight: 500;
-      color: white;
-      background: var(--sage);
-      border: none;
-      border-radius: var(--border-radius-md);
-      padding: 7px 14px;
-      cursor: pointer;
+      font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+      color: white; background: var(--sage); border: none;
+      border-radius: var(--radius-md); padding: 9px 16px; cursor: pointer;
     }
- 
     .btn-learn {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12px;
-      color: var(--color-text-secondary);
-      background: none;
-      border: 0.5px solid var(--color-border-tertiary);
-      border-radius: var(--border-radius-md);
-      padding: 7px 14px;
-      cursor: pointer;
+      font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--ink-mid);
+      background: none; border: 0.5px solid var(--border);
+      border-radius: var(--radius-md); padding: 9px 16px; cursor: pointer;
     }
- 
-    .next-steps {
-      background: var(--color-background-secondary);
-      border-radius: var(--border-radius-lg);
-      padding: 1rem 1.25rem;
-      margin-top: 1rem;
-    }
- 
+    .next-steps { background: #f9f7f4; border-radius: var(--radius-lg); padding: 1.35rem 1.5rem; margin-top: 1.25rem; }
     .next-steps-title {
-      font-size: 12px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--color-text-secondary);
-      margin-bottom: 0.75rem;
+      font-size: 13px; font-weight: 500; text-transform: uppercase;
+      letter-spacing: 0.06em; color: var(--ink-mid); margin-bottom: 1rem;
     }
- 
     .next-step-item {
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      margin-bottom: 8px;
-      font-size: 13px;
-      color: var(--color-text-primary);
-      line-height: 1.5;
+      display: flex; gap: 12px; align-items: flex-start;
+      margin-bottom: 10px; font-size: 15px; color: var(--ink); line-height: 1.6;
     }
- 
     .step-num {
-      width: 20px; height: 20px;
-      border-radius: 50%;
-      background: var(--sage);
-      color: white;
-      font-size: 10px;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 1px;
+      width: 22px; height: 22px; border-radius: 50%; background: var(--sage);
+      color: white; font-size: 11px; font-weight: 500;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 2px;
     }
- 
     .restart-btn {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12px;
-      color: var(--color-text-secondary);
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 1rem 2rem;
-      display: block;
-      width: 100%;
-      text-align: center;
-      border-top: 0.5px solid var(--color-border-tertiary);
+      font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--ink-mid);
+      background: none; border: none; cursor: pointer;
+      padding: 1.25rem 2.5rem; display: block;
+      width: 100%; text-align: center; border-top: 0.5px solid var(--border);
     }
- 
     .disclaimer {
-      font-size: 11px;
-      color: var(--color-text-secondary);
-      padding: 0.75rem 2rem;
-      border-top: 0.5px solid var(--color-border-tertiary);
-      line-height: 1.5;
+      font-size: 12px; color: var(--ink-mid);
+      padding: 1rem 2.5rem 1.5rem; line-height: 1.6; border-top: 0.5px solid var(--border);
+    }
+
+    /* ABOUT */
+    .about-hero {
+      background: linear-gradient(160deg, #f9f7f3 0%, #eef0ea 100%);
+      padding: 5rem 2rem 4rem; text-align: center;
+    }
+    .about-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 56px); font-weight: 300;
+      color: var(--ink); line-height: 1.2; margin-bottom: 1rem;
+    }
+    .about-hero p { font-size: 19px; color: var(--ink-mid); max-width: 540px; margin: 0 auto; line-height: 1.7; }
+    .about-body { max-width: 740px; margin: 0 auto; padding: 4rem 2rem 5rem; }
+    .about-section { margin-bottom: 3.5rem; }
+    .about-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px; font-weight: 400; color: var(--ink);
+      margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 0.5px solid var(--border);
+    }
+    .about-section p { font-size: 17px; color: var(--ink-mid); line-height: 1.85; margin-bottom: 1.1rem; }
+    .about-section p:last-child { margin-bottom: 0; }
+    .blacklist-box {
+      background: var(--sage-light); border-left: 3px solid var(--sage);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 1.5rem 1.75rem; margin-top: 1.5rem;
+    }
+    .blacklist-box p { font-size: 16px; color: var(--ink); line-height: 1.75; margin: 0; }
+    .values-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem; margin-top: 1.5rem;
+    }
+    .value-card {
+      background: white; border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg); padding: 1.5rem;
+    }
+    .value-icon { font-size: 26px; margin-bottom: 0.75rem; }
+    .value-title { font-size: 16px; font-weight: 500; color: var(--ink); margin-bottom: 0.4rem; }
+    .value-desc { font-size: 14px; color: var(--ink-mid); line-height: 1.6; }
+
+    /* FOOTER */
+    footer {
+      background: var(--ink); color: rgba(255,255,255,0.5);
+      text-align: center; padding: 2.5rem 2rem;
+      font-size: 14px; line-height: 1.8;
+    }
+    footer strong { color: rgba(255,255,255,0.85); }
+
+    /* MOBILE */
+    @media (max-width: 600px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links a:not(.nav-cta) { display: none; }
+      .step-body { padding: 1.5rem 1.25rem 1rem; }
+      .form-header { padding: 1.75rem 1.25rem 1.5rem; }
+      .progress-bar { padding: 1rem 1.25rem; }
+      .nav-row { padding: 1rem 1.25rem 1.5rem; }
+      .result-wrap { padding: 1.5rem 1.25rem; }
+      .disclaimer { padding: 1rem 1.25rem 1.5rem; }
+      .restart-btn { padding: 1rem 1.25rem; }
+      .hiw-cta { flex-direction: column; }
+      .step-row { grid-template-columns: 48px 1fr; gap: 1rem; }
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="header">
-      <div class="header-eyebrow">Resting Place</div>
-      <h1>Find the right place<br><em>for your loved one</em></h1>
-      <p>A gentle, guided process to match you with the best options — no pressure, no sales calls.</p>
+
+  <nav>
+    <div class="nav-logo" onclick="showPage('home')">Resting<span>Place</span></div>
+    <div class="nav-links">
+      <a onclick="showPage('home')">Home</a>
+      <a onclick="showPage('how')">How It Works</a>
+      <a onclick="showPage('about')">About</a>
+      <a class="nav-cta" onclick="showPage('form')">Find a Match</a>
     </div>
-    <div id="app"></div>
+  </nav>
+
+  <!-- HOME -->
+  <div id="page-home" class="page active">
+    <div class="hero">
+      <div class="hero-eyebrow">A free service for families</div>
+      <h1>Finding a final resting place<br>should feel <em>peaceful</em>,<br>not overwhelming.</h1>
+      <p class="hero-sub">We guide grieving families through finding the right burial or memorial option — with honesty, care, and absolutely no hidden agendas.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="showPage('form')">Find a match for your loved one</button>
+        <button class="btn-secondary" onclick="showPage('how')">See how it works</button>
+      </div>
+      <div class="trust-row">
+        <div class="trust-item">
+          <div class="trust-num">100%</div>
+          <div class="trust-label">Free for families</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-num">0</div>
+          <div class="trust-label">Sales calls or pressure</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-num">Vetted</div>
+          <div class="trust-label">Every provider reviewed</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="promise-strip">
+      <div class="promise-inner">
+        <div class="promise-item">
+          <div class="promise-icon">🛡️</div>
+          <div class="promise-title">Every provider is vetted</div>
+          <div class="promise-desc">We personally research each cemetery and funeral home before listing them. Those with poor reviews, hidden fees, or predatory practices are permanently blacklisted — no exceptions.</div>
+        </div>
+        <div class="promise-item">
+          <div class="promise-icon">🌿</div>
+          <div class="promise-title">All options, no pressure</div>
+          <div class="promise-desc">Traditional burial, cremation, green burial, memorial forests — we match you to what's right for your family and your budget, not what earns us the highest fee.</div>
+        </div>
+        <div class="promise-item">
+          <div class="promise-icon">💛</div>
+          <div class="promise-title">Built with compassion</div>
+          <div class="promise-desc">This service was created on the belief that every family deserves honest, clear guidance during the hardest moments of their lives.</div>
+        </div>
+      </div>
+    </div>
   </div>
- 
+
+  <!-- HOW IT WORKS -->
+  <div id="page-how" class="page">
+    <div class="section">
+      <div class="section-eyebrow">The process</div>
+      <h2>Simple, gentle,<br>and completely free.</h2>
+      <p class="section-intro">From your first question to your final decision, we're here to make one of the hardest tasks a little easier.</p>
+
+      <div class="step-row">
+        <div class="step-number">01</div>
+        <div class="step-content">
+          <h3>Tell us about your situation</h3>
+          <p>Answer a few gentle questions about your loved one, your preferences, your location, and your budget. There are no wrong answers and no commitment required. The whole process takes about two minutes.</p>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-number">02</div>
+        <div class="step-content">
+          <h3>We find your best matches</h3>
+          <p>Based on your answers, we identify the two or three providers that are the best fit for your family — not the ones that pay us the most. Every option has been personally reviewed for quality, transparency, and fair pricing before it ever appears in your results.</p>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-number">03</div>
+        <div class="step-content">
+          <h3>You receive a personal match report</h3>
+          <p>Your results are sent directly to your email, along with pricing information, distance, availability, and a note about why each provider was selected for you specifically. No sales calls. No pressure. Just clear, honest information.</p>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-number">04</div>
+        <div class="step-content">
+          <h3>Reach out on your own terms</h3>
+          <p>When you're ready, contact any provider directly. We never share your information without your knowledge, and you are never under any obligation. If you have more questions, simply reply to your email — we're here for as long as you need us.</p>
+        </div>
+      </div>
+
+      <div class="hiw-cta">
+        <div class="hiw-cta-text">
+          <h3>Ready to find the right place?</h3>
+          <p>It takes two minutes. It costs nothing. It could mean everything.</p>
+        </div>
+        <button class="btn-primary" onclick="showPage('form')">Get started</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div id="page-form" class="page">
+    <div class="form-page-wrap">
+      <div class="form-card">
+        <div class="form-header">
+          <div class="form-eyebrow">Resting Place Concierge</div>
+          <h2>Find the right place<br><em style="font-style:italic;color:var(--sage)">for your loved one</em></h2>
+          <p>A gentle, guided process to match you with the best options — no pressure, no sales calls, completely free.</p>
+        </div>
+        <div id="form-app"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div id="page-about" class="page">
+    <div class="about-hero">
+      <div class="section-eyebrow">Our story</div>
+      <h1>Built for families,<br>not for profit.</h1>
+      <p>Resting Place was created out of a simple belief: that no family should have to navigate one of life's hardest decisions alone — or be taken advantage of while doing it.</p>
+    </div>
+
+    <div class="about-body">
+      <div class="about-section">
+        <h2>About the Founder</h2>
+        <p>My name is John, and I'm a computer science student at the University of Southern California. I built Resting Place because I believe the funeral and burial industry — despite serving families at their most vulnerable — has long operated with a troubling lack of transparency and accountability.</p>
+        <p>This is a non-profit service. I didn't create it to generate revenue, but to give families a reliable, compassionate resource at a moment when they have very little time, energy, or emotional bandwidth to research their options on their own. Every match sent through this platform is filtered through a rigorous vetting process before it ever reaches you.</p>
+      </div>
+
+      <div class="about-section">
+        <h2>Our Standards</h2>
+        <p>Not every cemetery or funeral home makes the cut — and that's entirely by design. Every provider is put through a careful review process examining customer feedback, pricing transparency, and overall business practices.</p>
+        <div class="blacklist-box">
+          <p><strong>Any establishment with a pattern of low reviews, unexpected upcharges, unexplained "security deposits," or other predatory practices is permanently blacklisted</strong> and will never appear in your results — no matter how much they offer to pay for placement. Your trust is worth more than any referral fee.</p>
+        </div>
+      </div>
+
+      <div class="about-section">
+        <h2>What We Stand For</h2>
+        <div class="values-grid">
+          <div class="value-card">
+            <div class="value-icon">🔍</div>
+            <div class="value-title">Transparency</div>
+            <div class="value-desc">We are open about how we operate and how providers are selected. No hidden agendas, ever.</div>
+          </div>
+          <div class="value-card">
+            <div class="value-icon">🛡️</div>
+            <div class="value-title">Protection</div>
+            <div class="value-desc">Families shouldn't be upsold or misled during grief. We vet every provider so you never have to.</div>
+          </div>
+          <div class="value-card">
+            <div class="value-icon">💛</div>
+            <div class="value-title">Compassion</div>
+            <div class="value-desc">Every decision in building this platform was made with grieving families in mind — not engagement metrics.</div>
+          </div>
+          <div class="value-card">
+            <div class="value-icon">🌿</div>
+            <div class="value-title">Accessibility</div>
+            <div class="value-desc">This service is and will always remain completely free for every family who needs it.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-section">
+        <p style="font-size:18px; color:var(--ink-mid); line-height:1.85;">If you're here, you're likely going through something incredibly difficult. Know that every match you receive was chosen because it was genuinely the best fit for your situation — not because of who paid the most to appear there.</p>
+        <p style="margin-top:1.75rem;">
+          <button class="btn-primary" onclick="showPage('form')">Find a match for your loved one</button>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <strong>Resting Place</strong> — A free service for families in need.<br><br>
+    <span style="font-size:13px; line-height:1.8;">We receive referral fees from some providers. These fees help keep this service running — and any profit generated is donated to families who cannot afford end-of-life arrangements. They never influence match order. Best fit always comes first.<br>Your personal information is kept private and never sold or shared.</span>
+  </footer>
+
   <script>
+    function showPage(id) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('page-' + id).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (id === 'form') renderForm();
+    }
+
     const state = {
       step: 0,
-      answers: { name:'', relation:'', timeline:'', type:'', religion:'', location:'', budget:'', preferences:'', contact:'', email:'' },
+      answers: { name:'',relation:'',timeline:'',type:'',religion:'',location:'',budget:'',preferences:'',contact:'',email:'' },
       resultText: ''
     };
- 
-    const STEPS = ['About','Service type','Details','Contact'];
- 
+
+    const STEPS = ['About you','Service type','Details','Contact'];
+
     function sel(id) { return document.getElementById(id); }
- 
+
     function renderProgress() {
       const bars = STEPS.map((s, i) => {
         const cls = i < state.step ? 'done' : i === state.step ? 'active' : '';
         return `<div class="progress-step ${cls}"></div>`;
       }).join('');
-      return `<div class="progress-bar">${bars}<span class="progress-label">${state.step + 1} of ${STEPS.length}</span></div>`;
+      return `<div class="progress-bar">${bars}<span class="progress-label">Step ${state.step + 1} of ${STEPS.length}</span></div>`;
     }
- 
+
     function renderStep0() {
-      return `
-        ${renderProgress()}
+      return `${renderProgress()}
         <div class="step-body">
-          <div class="step-title">Tell us a little</div>
+          <div class="step-title">Tell us a little about yourself</div>
           <div class="step-sub">We're here to help. There are no wrong answers.</div>
           <label class="field-label">Your name</label>
           <input type="text" id="f-name" placeholder="Your first name" value="${state.answers.name}">
-          <label class="field-label" style="margin-top:1rem">Your relationship to the deceased</label>
+          <label class="field-label" style="margin-top:1.25rem">Your relationship to the deceased</label>
           <div class="option-grid">
-            ${[['Spouse / partner','Partner'],['Child','Child'],['Parent','Parent'],['Sibling','Sibling'],['Friend','Friend'],['Other','Other']].map(([label, val]) =>
-              `<div class="option-card ${state.answers.relation===val?'selected':''}" onclick="pick('relation','${val}',this)">
-                <div class="option-label">${label}</div>
-              </div>`).join('')}
+            ${[['Spouse / partner','Partner'],['Child','Child'],['Parent','Parent'],['Sibling','Sibling'],['Friend','Friend'],['Other','Other']].map(([l,v])=>
+              `<div class="option-card ${state.answers.relation===v?'selected':''}" onclick="pick('relation','${v}',this)"><div class="option-label">${l}</div></div>`).join('')}
           </div>
-          <label class="field-label" style="margin-top:1rem">How soon do you need arrangements?</label>
+          <label class="field-label" style="margin-top:1.25rem">How soon do you need arrangements?</label>
           <div class="option-grid">
-            ${[['Immediately','Immediate'],['Within a week','Week'],['Within a month','Month'],['Planning ahead','Advance']].map(([label, val]) =>
-              `<div class="option-card ${state.answers.timeline===val?'selected':''}" onclick="pick('timeline','${val}',this)">
-                <div class="option-label">${label}</div>
-              </div>`).join('')}
+            ${[['Immediately','Immediate'],['Within a week','Week'],['Within a month','Month'],['Planning ahead','Advance']].map(([l,v])=>
+              `<div class="option-card ${state.answers.timeline===v?'selected':''}" onclick="pick('timeline','${v}',this)"><div class="option-label">${l}</div></div>`).join('')}
           </div>
         </div>
-        <div class="nav-row">
-          <span></span>
-          <button class="btn-next" onclick="next()">Continue</button>
-        </div>`;
+        <div class="nav-row"><span></span><button class="btn-next" onclick="nextStep()">Continue →</button></div>`;
     }
- 
+
     function renderStep1() {
       const types = [
         ['Traditional burial','Traditional','Full burial in a cemetery plot'],
-        ['Cremation + urn','Cremation','Cremated remains kept or scattered'],
+        ['Cremation + urn','Cremation','Remains kept, scattered, or interred'],
         ['Green / natural burial','Green','Eco-friendly, no embalming'],
         ['Memorial tree / forest','Forest','Ashes beneath a living tree'],
         ['Mausoleum / crypt','Mausoleum','Above-ground entombment'],
         ['Not sure yet','Unsure','We can help you decide']
       ];
-      return `
-        ${renderProgress()}
+      return `${renderProgress()}
         <div class="step-body">
           <div class="step-title">What type of service?</div>
-          <div class="step-sub">Select whatever feels right — or choose "Not sure yet."</div>
+          <div class="step-sub">Select whatever feels right — or choose "Not sure yet" and we'll guide you.</div>
           <div class="option-grid">
-            ${types.map(([label, val, desc]) =>
-              `<div class="option-card ${state.answers.type===val?'selected':''}" onclick="pick('type','${val}',this)">
-                <div class="option-label">${label}</div>
-                <div class="option-desc">${desc}</div>
+            ${types.map(([l,v,d])=>
+              `<div class="option-card ${state.answers.type===v?'selected':''}" onclick="pick('type','${v}',this)">
+                <div class="option-label">${l}</div><div class="option-desc">${d}</div>
               </div>`).join('')}
           </div>
         </div>
-        <div class="nav-row">
-          <button class="btn-back" onclick="back()">Back</button>
-          <button class="btn-next" onclick="next()">Continue</button>
-        </div>`;
+        <div class="nav-row"><button class="btn-back" onclick="backStep()">← Back</button><button class="btn-next" onclick="nextStep()">Continue →</button></div>`;
     }
- 
+
     function renderStep2() {
-      return `
-        ${renderProgress()}
+      return `${renderProgress()}
         <div class="step-body">
           <div class="step-title">A few more details</div>
-          <div class="step-sub">This helps us find options that truly fit.</div>
+          <div class="step-sub">This helps us find options that truly fit your family's needs.</div>
           <label class="field-label">City or ZIP code</label>
           <input type="text" id="f-loc" placeholder="e.g. Los Angeles, CA or 90210" value="${state.answers.location}">
-          <label class="field-label" style="margin-top:1rem">Budget range (approximate)</label>
+          <label class="field-label" style="margin-top:1.25rem">Approximate budget</label>
           <div class="option-grid">
-            ${[['Under $3,000','Under3k'],['$3,000–$8,000','3k8k'],['$8,000–$15,000','8k15k'],['$15,000+','15kPlus'],['Not sure','Unsure']].map(([label, val]) =>
-              `<div class="option-card ${state.answers.budget===val?'selected':''}" onclick="pick('budget','${val}',this)">
-                <div class="option-label">${label}</div>
-              </div>`).join('')}
+            ${[['Under $3,000','Under3k'],['$3,000–$8,000','3k8k'],['$8,000–$15,000','8k15k'],['$15,000+','15kPlus'],['Not sure','Unsure']].map(([l,v])=>
+              `<div class="option-card ${state.answers.budget===v?'selected':''}" onclick="pick('budget','${v}',this)"><div class="option-label">${l}</div></div>`).join('')}
           </div>
-          <label class="field-label" style="margin-top:1rem">Religious or cultural preferences</label>
+          <label class="field-label" style="margin-top:1.25rem">Religious or cultural preferences</label>
           <div class="option-grid">
-            ${[['Catholic','Catholic'],['Jewish','Jewish'],['Muslim','Muslim'],['Buddhist','Buddhist'],['Non-religious','None'],['Other','Other']].map(([label, val]) =>
-              `<div class="option-card ${state.answers.religion===val?'selected':''}" onclick="pick('religion','${val}',this)">
-                <div class="option-label">${label}</div>
-              </div>`).join('')}
+            ${[['Catholic','Catholic'],['Jewish','Jewish'],['Muslim','Muslim'],['Buddhist','Buddhist'],['Non-religious','None'],['Other','Other']].map(([l,v])=>
+              `<div class="option-card ${state.answers.religion===v?'selected':''}" onclick="pick('religion','${v}',this)"><div class="option-label">${l}</div></div>`).join('')}
           </div>
-          <label class="field-label" style="margin-top:1rem">Anything else we should know? (optional)</label>
-          <textarea id="f-pref" placeholder="e.g. needs to be near family, veteran benefits, peaceful setting...">${state.answers.preferences}</textarea>
+          <label class="field-label" style="margin-top:1.25rem">Anything else we should know? <span style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
+          <textarea id="f-pref" placeholder="e.g. needs to be near family, veteran benefits, peaceful setting, wheelchair accessible...">${state.answers.preferences}</textarea>
         </div>
-        <div class="nav-row">
-          <button class="btn-back" onclick="back()">Back</button>
-          <button class="btn-next" onclick="next()">Continue</button>
-        </div>`;
+        <div class="nav-row"><button class="btn-back" onclick="backStep()">← Back</button><button class="btn-next" onclick="nextStep()">Continue →</button></div>`;
     }
- 
+
     function renderStep3() {
-      return `
-        ${renderProgress()}
+      return `${renderProgress()}
         <div class="step-body">
           <div class="step-title">How should we reach you?</div>
-          <div class="step-sub">We'll send your matches by email. No spam, ever.</div>
-          <label class="field-label">Your email</label>
+          <div class="step-sub">We'll send your matches by email within the hour. No spam — ever.</div>
+          <label class="field-label">Your email address</label>
           <input type="email" id="f-email" placeholder="you@example.com" value="${state.answers.email}">
-          <label class="field-label" style="margin-top:1rem">Phone (optional)</label>
+          <label class="field-label" style="margin-top:1.25rem">Phone number <span style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
           <input type="tel" id="f-phone" placeholder="+1 (555) 000-0000" value="${state.answers.contact}">
         </div>
-        <div class="nav-row">
-          <button class="btn-back" onclick="back()">Back</button>
-          <button class="btn-next" onclick="submit()">Find my matches</button>
-        </div>`;
+        <div class="nav-row"><button class="btn-back" onclick="backStep()">← Back</button><button class="btn-next" onclick="submitForm()">Find my matches →</button></div>`;
     }
- 
+
     function renderLoading() {
-      return `
-        <div class="loading-state">
-          <div class="loading-dots">
-            <div class="dot"></div><div class="dot"></div><div class="dot"></div>
-          </div>
-          <div class="loading-text">Finding the right options for you...</div>
-        </div>`;
+      return `<div class="loading-state">
+        <div class="loading-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+        <div class="loading-text">Finding the right options for you...</div>
+      </div>`;
     }
- 
+
     function renderResults(content) {
-      return `
-        <div class="result-wrap">
-          <div class="result-intro">${content}</div>
- 
-          <div class="match-card top-pick">
-            <div class="match-header">
-              <div>
-                <div class="match-name">Hillside Memorial Park</div>
-                <div class="match-type">Traditional cemetery · Los Angeles, CA</div>
-              </div>
-              <div class="best-badge">Best match</div>
-            </div>
-            <div class="match-details">
-              <div class="detail-item">Plot price<div class="detail-value">$4,500–$9,000</div></div>
-              <div class="detail-item">Distance<div class="detail-value">4.2 miles</div></div>
-              <div class="detail-item">Availability<div class="detail-value">Open plots</div></div>
-            </div>
-            <div class="match-note">Peaceful, well-maintained grounds with Jewish, non-denominational, and interfaith sections. Pre-need planning specialists on staff. Veterans' section available.</div>
-            <div class="match-actions">
-              <button class="btn-contact">Request info</button>
-              <button class="btn-learn">View details</button>
-            </div>
+      return `<div class="result-wrap">
+        <div class="result-intro">${content}</div>
+        <div class="match-card top-pick">
+          <div class="match-header">
+            <div><div class="match-name">Hillside Memorial Park</div><div class="match-type">Traditional cemetery · Los Angeles, CA</div></div>
+            <div class="best-badge">Best match</div>
           </div>
- 
-          <div class="match-card">
-            <div class="match-header">
-              <div>
-                <div class="match-name">Forest Lawn – Glendale</div>
-                <div class="match-type">Memorial park · Glendale, CA</div>
-              </div>
-            </div>
-            <div class="match-details">
-              <div class="detail-item">Plot price<div class="detail-value">$6,000–$14,000</div></div>
-              <div class="detail-item">Distance<div class="detail-value">8.1 miles</div></div>
-              <div class="detail-item">Availability<div class="detail-value">Open plots</div></div>
-            </div>
-            <div class="match-note">One of LA's most established memorial parks. Full-service funeral home on-site, chapel, and mausoleum options. Multi-faith. Landscaped gardens.</div>
-            <div class="match-actions">
-              <button class="btn-contact">Request info</button>
-              <button class="btn-learn">View details</button>
-            </div>
+          <div class="match-details">
+            <div class="detail-item">Plot price<div class="detail-value">$4,500–$9,000</div></div>
+            <div class="detail-item">Distance<div class="detail-value">4.2 miles</div></div>
+            <div class="detail-item">Availability<div class="detail-value">Open plots</div></div>
           </div>
- 
-          <div class="match-card">
-            <div class="match-header">
-              <div>
-                <div class="match-name">Pacific Crest Natural Burial</div>
-                <div class="match-type">Green burial ground · Ventura County, CA</div>
-              </div>
-            </div>
-            <div class="match-details">
-              <div class="detail-item">Plot price<div class="detail-value">$2,200–$4,500</div></div>
-              <div class="detail-item">Distance<div class="detail-value">34 miles</div></div>
-              <div class="detail-item">Availability<div class="detail-value">Open plots</div></div>
-            </div>
-            <div class="match-note">Eco-friendly burial with no embalming or concrete vaults. Shroud or biodegradable casket. Peaceful hillside setting. A meaningful, sustainable choice.</div>
-            <div class="match-actions">
-              <button class="btn-contact">Request info</button>
-              <button class="btn-learn">View details</button>
-            </div>
-          </div>
- 
-          <div class="next-steps">
-            <div class="next-steps-title">Your next steps</div>
-            <div class="next-step-item"><div class="step-num">1</div>We'll email your full match report to ${state.answers.email || 'you'} within the hour.</div>
-            <div class="next-step-item"><div class="step-num">2</div>Contact any provider above — no obligation.</div>
-            <div class="next-step-item"><div class="step-num">3</div>Reply to your email anytime if you need more help.</div>
-          </div>
+          <div class="match-note">Peaceful, well-maintained grounds with Jewish, non-denominational, and interfaith sections. Pre-need planning specialists on staff. Veterans' section available.</div>
+          <div class="match-actions"><button class="btn-contact">Request info</button><button class="btn-learn">View details</button></div>
         </div>
-        <button class="restart-btn" onclick="restart()">Start a new search</button>
-        <div class="disclaimer">Resting Place receives referral fees from some providers. This never affects the order of your matches — we always show best fit first. Your information is kept private and never sold.</div>`;
+        <div class="match-card">
+          <div class="match-header">
+            <div><div class="match-name">Forest Lawn – Glendale</div><div class="match-type">Memorial park · Glendale, CA</div></div>
+          </div>
+          <div class="match-details">
+            <div class="detail-item">Plot price<div class="detail-value">$6,000–$14,000</div></div>
+            <div class="detail-item">Distance<div class="detail-value">8.1 miles</div></div>
+            <div class="detail-item">Availability<div class="detail-value">Open plots</div></div>
+          </div>
+          <div class="match-note">One of LA's most established memorial parks. Full-service funeral home on-site, chapel, and mausoleum options. Multi-faith. Beautifully landscaped gardens.</div>
+          <div class="match-actions"><button class="btn-contact">Request info</button><button class="btn-learn">View details</button></div>
+        </div>
+        <div class="match-card">
+          <div class="match-header">
+            <div><div class="match-name">Pacific Crest Natural Burial</div><div class="match-type">Green burial ground · Ventura County, CA</div></div>
+          </div>
+          <div class="match-details">
+            <div class="detail-item">Plot price<div class="detail-value">$2,200–$4,500</div></div>
+            <div class="detail-item">Distance<div class="detail-value">34 miles</div></div>
+            <div class="detail-item">Availability<div class="detail-value">Open plots</div></div>
+          </div>
+          <div class="match-note">Eco-friendly burial with no embalming or concrete vaults. Peaceful hillside setting with sweeping views. A meaningful, sustainable farewell.</div>
+          <div class="match-actions"><button class="btn-contact">Request info</button><button class="btn-learn">View details</button></div>
+        </div>
+        <div class="next-steps">
+          <div class="next-steps-title">Your next steps</div>
+          <div class="next-step-item"><div class="step-num">1</div>Check your inbox — your full match report will arrive at ${state.answers.email || 'your email'} shortly.</div>
+          <div class="next-step-item"><div class="step-num">2</div>Take your time reviewing each option. There's no rush and no pressure.</div>
+          <div class="next-step-item"><div class="step-num">3</div>Reply to your email anytime if you have questions or need more help.</div>
+        </div>
+      </div>
+      <button class="restart-btn" onclick="restartForm()">← Start a new search</button>
+      <div class="disclaimer">Resting Place receives referral fees from some providers. This never influences the order of your results — best fit always comes first. Your personal information is kept private and never sold or shared.</div>`;
     }
- 
+
     function pick(field, value, el) {
       state.answers[field] = value;
       el.closest('.option-grid').querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
       el.classList.add('selected');
     }
- 
-    function collectCurrentFields() {
-      if (state.step === 0) { const n = sel('f-name'); if (n) state.answers.name = n.value; }
+
+    function collectFields() {
+      if (state.step === 0) { const n = sel('f-name'); if(n) state.answers.name = n.value; }
       if (state.step === 2) {
-        const l = sel('f-loc'); if (l) state.answers.location = l.value;
-        const p = sel('f-pref'); if (p) state.answers.preferences = p.value;
+        const l = sel('f-loc'); if(l) state.answers.location = l.value;
+        const p = sel('f-pref'); if(p) state.answers.preferences = p.value;
       }
       if (state.step === 3) {
-        const e = sel('f-email'); if (e) state.answers.email = e.value;
-        const ph = sel('f-phone'); if (ph) state.answers.contact = ph.value;
+        const e = sel('f-email'); if(e) state.answers.email = e.value;
+        const ph = sel('f-phone'); if(ph) state.answers.contact = ph.value;
       }
     }
- 
-    function next() { collectCurrentFields(); state.step++; render(); }
-    function back() { collectCurrentFields(); state.step--; render(); }
- 
-    async function submit() {
-      collectCurrentFields();
+
+    function nextStep() { collectFields(); state.step++; renderForm(); }
+    function backStep() { collectFields(); state.step--; renderForm(); }
+
+    async function submitForm() {
+      collectFields();
       state.step = 'loading';
-      render();
- 
+      renderForm();
       const a = state.answers;
-      const prompt = `You are a compassionate concierge helping a grieving family find a burial or memorial site. Be warm, empathetic, and practical. Keep your response to 3-4 sentences maximum.
- 
-Family details:
-- Name: ${a.name || 'not provided'}
-- Relation to deceased: ${a.relation || 'not provided'}
-- Timeline: ${a.timeline || 'not provided'}
-- Service type desired: ${a.type || 'not provided'}
-- Location: ${a.location || 'Los Angeles area'}
-- Budget: ${a.budget || 'not provided'}
-- Religious preference: ${a.religion || 'none specified'}
-- Additional notes: ${a.preferences || 'none'}
- 
-Write a brief, warm 3-sentence introduction paragraph for their match results. Acknowledge their situation with care, confirm you understood their needs, and let them know you've found some good options. Do not use any markdown formatting.`;
- 
+
+      try {
+        await fetch('https://formspree.io/f/xlgzjryv', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: a.name, email: a.email, phone: a.contact,
+            relation: a.relation, timeline: a.timeline,
+            service_type: a.type, location: a.location,
+            budget: a.budget, religion: a.religion, notes: a.preferences
+          })
+        });
+      } catch(e) { console.log('Formspree error', e); }
+
+      const prompt = `You are a compassionate concierge helping a grieving family find a burial or memorial site. Write exactly 3 warm, human sentences. No markdown.
+
+Name: ${a.name||'not provided'}, Relation: ${a.relation||'not provided'}, Timeline: ${a.timeline||'not provided'}, Service: ${a.type||'not provided'}, Location: ${a.location||'Los Angeles'}, Budget: ${a.budget||'not provided'}, Religion: ${a.religion||'none'}, Notes: ${a.preferences||'none'}
+
+Write a gentle 3-sentence intro for their match results. Acknowledge their loss, confirm you understood their needs, reassure them the options below were carefully chosen.`;
+
       try {
         const resp = await fetch('https://api.anthropic.com/v1/messages', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            model: 'claude-sonnet-4-20250514',
-            max_tokens: 1000,
+            model: 'claude-sonnet-4-20250514', max_tokens: 1000,
             messages: [{ role: 'user', content: prompt }]
           })
         });
         const data = await resp.json();
-        const text = data.content?.map(b => b.text || '').join('') ||
-          `Thank you${a.name ? ', ' + a.name : ''}. We've carefully reviewed your preferences and found three options that we believe would be a meaningful fit. Please take your time reviewing each one below.`;
-        state.step = 'results';
-        state.resultText = text;
+        state.resultText = data.content?.map(b => b.text||'').join('') ||
+          `Thank you${a.name?', '+a.name:''}. We've carefully reviewed your preferences and found three options that we believe would be a meaningful fit for your loved one. Please take all the time you need.`;
       } catch(e) {
-        state.step = 'results';
-        state.resultText = `Thank you${a.name ? ', ' + a.name : ''}. We've carefully reviewed your preferences and found three options that we believe would be a meaningful fit for your loved one. Please take your time reviewing each one below.`;
+        state.resultText = `Thank you${a.name?', '+a.name:''}. We've carefully reviewed your preferences and found three options that we believe would be a meaningful fit for your loved one. Please take all the time you need.`;
       }
-      render();
+      state.step = 'results';
+      renderForm();
     }
- 
-    function restart() {
+
+    function restartForm() {
       state.step = 0;
       state.answers = { name:'',relation:'',timeline:'',type:'',religion:'',location:'',budget:'',preferences:'',contact:'',email:'' };
       state.resultText = '';
-      render();
+      renderForm();
     }
- 
-    function render() {
-      const app = sel('app');
+
+    function renderForm() {
+      const app = sel('form-app');
       if (!app) return;
       if (state.step === 'loading') { app.innerHTML = renderLoading(); return; }
       if (state.step === 'results') { app.innerHTML = renderResults(state.resultText); return; }
       const steps = [renderStep0, renderStep1, renderStep2, renderStep3];
       app.innerHTML = steps[state.step]();
     }
- 
-    render();
   </script>
 </body>
 </html>
