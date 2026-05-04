@@ -18,10 +18,10 @@
       --radius-md: 10px;
       --radius-lg: 16px;
     }
- 
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
- 
+
     body {
       font-family: 'DM Sans', sans-serif;
       background: var(--bg);
@@ -29,7 +29,7 @@
       font-size: 17px;
       line-height: 1.7;
     }
- 
+
     /* NAV */
     nav {
       position: sticky; top: 0; z-index: 100;
@@ -57,11 +57,11 @@
       padding: 9px 20px; border-radius: var(--radius-md);
     }
     .nav-cta:hover { opacity: 0.85; }
- 
+
     /* PAGES */
     .page { display: none; }
     .page.active { display: block; }
- 
+
     /* BUTTONS */
     .btn-primary {
       font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 500;
@@ -79,7 +79,7 @@
       text-decoration: none; display: inline-block;
     }
     .btn-secondary:hover { border-color: var(--sage-mid); }
- 
+
     /* HOME */
     .hero {
       min-height: calc(100vh - 64px);
@@ -120,7 +120,7 @@
       font-size: 36px; font-weight: 300; color: var(--sage);
     }
     .trust-label { font-size: 14px; color: var(--ink-mid); text-align: center; }
- 
+
     .promise-strip {
       background: white;
       border-top: 0.5px solid var(--border);
@@ -136,7 +136,7 @@
     .promise-icon { font-size: 26px; margin-bottom: 0.25rem; }
     .promise-title { font-size: 18px; font-weight: 500; color: var(--ink); }
     .promise-desc { font-size: 16px; color: var(--ink-mid); line-height: 1.65; }
- 
+
     /* HOW IT WORKS */
     .section { max-width: 860px; margin: 0 auto; padding: 5rem 2rem; }
     .section-eyebrow {
@@ -178,7 +178,7 @@
       font-size: 28px; font-weight: 400; color: var(--ink); margin-bottom: 0.3rem;
     }
     .hiw-cta-text p { font-size: 16px; color: var(--ink-mid); }
- 
+
     /* FORM */
     .form-page-wrap {
       min-height: calc(100vh - 64px); background: var(--bg);
@@ -262,7 +262,7 @@
       border-radius: var(--radius-md); padding: 13px 28px; cursor: pointer; transition: opacity 0.15s;
     }
     .btn-next:hover { opacity: 0.87; }
- 
+
     /* Loading */
     .loading-state { text-align: center; padding: 4rem 2rem; }
     .loading-dots { display: flex; justify-content: center; gap: 8px; margin-bottom: 1.25rem; }
@@ -280,7 +280,7 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: 22px; font-weight: 300; color: var(--ink-mid);
     }
- 
+
     /* Results */
     .result-wrap { padding: 2rem 2.5rem; }
     .result-intro {
@@ -339,7 +339,7 @@
       font-size: 12px; color: var(--ink-mid);
       padding: 1rem 2.5rem 1.5rem; line-height: 1.6; border-top: 0.5px solid var(--border);
     }
- 
+
     /* ABOUT */
     .about-hero {
       background: linear-gradient(160deg, #f9f7f3 0%, #eef0ea 100%);
@@ -377,7 +377,7 @@
     .value-icon { font-size: 26px; margin-bottom: 0.75rem; }
     .value-title { font-size: 16px; font-weight: 500; color: var(--ink); margin-bottom: 0.4rem; }
     .value-desc { font-size: 14px; color: var(--ink-mid); line-height: 1.6; }
- 
+
     /* FOOTER */
     footer {
       background: var(--ink); color: rgba(255,255,255,0.5);
@@ -385,7 +385,7 @@
       font-size: 14px; line-height: 1.8;
     }
     footer strong { color: rgba(255,255,255,0.85); }
- 
+
     /* MOBILE */
     @media (max-width: 600px) {
       nav { padding: 0 1.25rem; }
@@ -403,7 +403,7 @@
   </style>
 </head>
 <body>
- 
+
   <nav>
     <div class="nav-logo" onclick="showPage('home')">Resting<span>Place</span></div>
     <div class="nav-links">
@@ -413,7 +413,7 @@
       <a class="nav-cta" onclick="showPage('form')">Find a Match</a>
     </div>
   </nav>
- 
+
   <!-- HOME -->
   <div id="page-home" class="page active">
     <div class="hero">
@@ -439,7 +439,7 @@
         </div>
       </div>
     </div>
- 
+
     <div class="promise-strip">
       <div class="promise-inner">
         <div class="promise-item">
@@ -460,12 +460,12 @@
       </div>
     </div>
   </div>
- 
+
   <div id="page-how" class="page">
     <div class="section">
       <div class="section-eyebrow">The process</div>
       <h2>Simple, gentle,<br>and completely free.</h2>
- 
+
       <div class="step-row">
         <div class="step-number">01</div>
         <div class="step-content">
@@ -494,7 +494,7 @@
           <p>Contact any provider when you're ready. You're never under any obligation, and we're here if you have questions.</p>
         </div>
       </div>
- 
+
       <div class="hiw-cta">
         <div class="hiw-cta-text">
           <h3>Ready to find the right place?</h3>
@@ -504,7 +504,7 @@
       </div>
     </div>
   </div>
- 
+
   <!-- FORM -->
   <div id="page-form" class="page">
     <div class="form-page-wrap">
@@ -512,13 +512,13 @@
         <div class="form-header">
           <div class="form-eyebrow">Resting Place Concierge</div>
           <h2>Find the right place<br><em style="font-style:italic;color:var(--sage)">for your loved one</em></h2>
-          <p>A gentle, guided process to match you with the best options — no pressure, no sales calls, completely free.</p>
+          <p id="form-subtitle" style="font-size:16px; color:var(--ink-mid); margin-top:0.5rem; line-height:1.6;">A gentle, guided process to match you with the best options — no pressure, no sales calls, completely free.</p>
         </div>
         <div id="form-app"></div>
       </div>
     </div>
   </div>
- 
+
   <!-- ABOUT -->
   <div id="page-about" class="page">
     <div class="about-hero">
@@ -526,20 +526,20 @@
       <h1>Built for families,<br>not for profit.</h1>
       <p>No family should have to navigate one of life's hardest decisions alone — or be taken advantage of while doing it.</p>
     </div>
- 
+
     <div class="about-body">
       <div class="about-section">
         <h2>About the Founder</h2>
         <p>My name is John, and I'm a computer science student at the University of Southern California. I built Resting Place because the funeral and burial industry — despite serving families at their most vulnerable — has long lacked the transparency they deserve. This is a non-profit service, created to give families a reliable, compassionate resource when they need it most.</p>
       </div>
- 
+
       <div class="about-section">
         <h2>Our Standards</h2>
         <div class="blacklist-box">
           <p><strong>Any establishment with a pattern of low reviews, unexpected upcharges, unexplained "security deposits," or other predatory practices is permanently blacklisted</strong> and will never appear in your results — regardless of what they offer to pay for placement.</p>
         </div>
       </div>
- 
+
       <div class="about-section">
         <h2>What We Stand For</h2>
         <div class="values-grid">
@@ -570,12 +570,12 @@
       </div>
     </div>
   </div>
- 
+
   <footer>
     <strong>Resting Place</strong> — A free service for families in need.<br><br>
     <span style="font-size:13px; line-height:1.8;">We receive referral fees from some providers. These fees help keep this service running — and any profit generated is donated to families who cannot afford end-of-life arrangements. They never influence match order. Best fit always comes first.<br>Your personal information is kept private and never sold or shared.</span>
   </footer>
- 
+
   <script>
     function showPage(id) {
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -583,17 +583,17 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
       if (id === 'form') renderForm();
     }
- 
+
     const state = {
       step: 0,
       answers: { name:'',relation:'',timeline:'',type:'',religion:'',location:'',budget:'',preferences:'',contact:'',email:'' },
       resultText: ''
     };
- 
+
     const STEPS = ['About you','Service type','Details','Contact'];
- 
+
     function sel(id) { return document.getElementById(id); }
- 
+
     function renderProgress() {
       const bars = STEPS.map((s, i) => {
         const cls = i < state.step ? 'done' : i === state.step ? 'active' : '';
@@ -601,7 +601,7 @@
       }).join('');
       return `<div class="progress-bar">${bars}<span class="progress-label">Step ${state.step + 1} of ${STEPS.length}</span></div>`;
     }
- 
+
     function renderStep0() {
       return `${renderProgress()}
         <div class="step-body">
@@ -609,7 +609,7 @@
           <div class="step-sub">We're here to help. There are no wrong answers.</div>
           <label class="field-label">Your name</label>
           <input type="text" id="f-name" placeholder="Your first name" value="${state.answers.name}">
-          <label class="field-label" style="margin-top:1.25rem">Your relationship to the deceased</label>
+          <label class="field-label" style="margin-top:1.25rem">Your relationship to your loved one</label>
           <div class="option-grid">
             ${[['Spouse / partner','Partner'],['Child','Child'],['Parent','Parent'],['Sibling','Sibling'],['Friend','Friend'],['Other','Other']].map(([l,v])=>
               `<div class="option-card ${state.answers.relation===v?'selected':''}" onclick="pick('relation','${v}',this)"><div class="option-label">${l}</div></div>`).join('')}
@@ -622,7 +622,7 @@
         </div>
         <div class="nav-row"><span></span><button class="btn-next" onclick="nextStep()">Continue →</button></div>`;
     }
- 
+
     function renderStep1() {
       const types = [
         ['Traditional burial','Traditional','Full burial in a cemetery plot'],
@@ -645,7 +645,7 @@
         </div>
         <div class="nav-row"><button class="btn-back" onclick="backStep()">← Back</button><button class="btn-next" onclick="nextStep()">Continue →</button></div>`;
     }
- 
+
     function renderStep2() {
       return `${renderProgress()}
         <div class="step-body">
@@ -668,7 +668,7 @@
         </div>
         <div class="nav-row"><button class="btn-back" onclick="backStep()">← Back</button><button class="btn-next" onclick="nextStep()">Continue →</button></div>`;
     }
- 
+
     function renderStep3() {
       return `${renderProgress()}
         <div class="step-body">
@@ -681,71 +681,43 @@
         </div>
         <div class="nav-row"><button class="btn-back" onclick="backStep()">← Back</button><button class="btn-next" onclick="submitForm()">Find my matches →</button></div>`;
     }
- 
+
     function renderLoading() {
       return `<div class="loading-state">
         <div class="loading-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
         <div class="loading-text">Finding the right options for you...</div>
       </div>`;
     }
- 
+
     function renderResults(content) {
       return `<div class="result-wrap">
         <div class="result-intro">${content}</div>
-        <div class="match-card top-pick">
-          <div class="match-header">
-            <div><div class="match-name">Hillside Memorial Park</div><div class="match-type">Traditional cemetery · Los Angeles, CA</div></div>
-            <div class="best-badge">Best match</div>
-          </div>
-          <div class="match-details">
-            <div class="detail-item">Plot price<div class="detail-value">$4,500–$9,000</div></div>
-            <div class="detail-item">Distance<div class="detail-value">4.2 miles</div></div>
-            <div class="detail-item">Availability<div class="detail-value">Open plots</div></div>
-          </div>
-          <div class="match-note">Peaceful, well-maintained grounds with Jewish, non-denominational, and interfaith sections. Pre-need planning specialists on staff. Veterans' section available.</div>
-          <div class="match-actions"><button class="btn-contact">Request info</button><button class="btn-learn">View details</button></div>
+
+        <div style="text-align:center; padding:2rem 1rem 1rem;">
+          <div style="font-size:40px; margin-bottom:1.25rem;">🌿</div>
+          <div style="font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:300; color:var(--ink); margin-bottom:0.75rem;">Your matches are on their way.</div>
+          <p style="font-size:16px; color:var(--ink-mid); line-height:1.75; max-width:400px; margin:0 auto;">We're reviewing providers that fit your situation and will send your match report to <strong style="color:var(--ink)">${state.answers.email || 'your email'}</strong> within a few hours.</p>
         </div>
-        <div class="match-card">
-          <div class="match-header">
-            <div><div class="match-name">Forest Lawn – Glendale</div><div class="match-type">Memorial park · Glendale, CA</div></div>
-          </div>
-          <div class="match-details">
-            <div class="detail-item">Plot price<div class="detail-value">$6,000–$14,000</div></div>
-            <div class="detail-item">Distance<div class="detail-value">8.1 miles</div></div>
-            <div class="detail-item">Availability<div class="detail-value">Open plots</div></div>
-          </div>
-          <div class="match-note">One of LA's most established memorial parks. Full-service funeral home on-site, chapel, and mausoleum options. Multi-faith. Beautifully landscaped gardens.</div>
-          <div class="match-actions"><button class="btn-contact">Request info</button><button class="btn-learn">View details</button></div>
+
+        <div style="background:#f9f7f4; border-radius:var(--radius-lg); padding:1.35rem 1.5rem; margin-top:2rem;">
+          <div style="font-size:13px; font-weight:500; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-mid); margin-bottom:1rem;">What happens next</div>
+          <div class="next-step-item"><div class="step-num">1</div>We review providers that match your location, budget, and preferences.</div>
+          <div class="next-step-item"><div class="step-num">2</div>Only vetted, fairly-priced options are included — nothing predatory, ever.</div>
+          <div class="next-step-item"><div class="step-num">3</div>Your report arrives by email. No sales calls, no pressure — just honest options.</div>
         </div>
-        <div class="match-card">
-          <div class="match-header">
-            <div><div class="match-name">Pacific Crest Natural Burial</div><div class="match-type">Green burial ground · Ventura County, CA</div></div>
-          </div>
-          <div class="match-details">
-            <div class="detail-item">Plot price<div class="detail-value">$2,200–$4,500</div></div>
-            <div class="detail-item">Distance<div class="detail-value">34 miles</div></div>
-            <div class="detail-item">Availability<div class="detail-value">Open plots</div></div>
-          </div>
-          <div class="match-note">Eco-friendly burial with no embalming or concrete vaults. Peaceful hillside setting with sweeping views. A meaningful, sustainable farewell.</div>
-          <div class="match-actions"><button class="btn-contact">Request info</button><button class="btn-learn">View details</button></div>
-        </div>
-        <div class="next-steps">
-          <div class="next-steps-title">Your next steps</div>
-          <div class="next-step-item"><div class="step-num">1</div>Check your inbox — your full match report will arrive at ${state.answers.email || 'your email'} shortly.</div>
-          <div class="next-step-item"><div class="step-num">2</div>Take your time reviewing each option. There's no rush and no pressure.</div>
-          <div class="next-step-item"><div class="step-num">3</div>Reply to your email anytime if you have questions or need more help.</div>
-        </div>
+
+        <p style="font-size:14px; color:var(--ink-mid); text-align:center; margin-top:1.5rem; line-height:1.7;">Questions in the meantime? Reply to your confirmation email<br>and we'll get back to you as soon as possible.</p>
       </div>
       <button class="restart-btn" onclick="restartForm()">← Start a new search</button>
-      <div class="disclaimer">Resting Place receives referral fees from some providers. This never influences the order of your results — best fit always comes first. Your personal information is kept private and never sold or shared.</div>`;
+      <div class="disclaimer">Resting Place receives referral fees from some providers. This never influences match order — best fit always comes first. Your personal information is kept private and never sold or shared.</div>`;
     }
- 
+
     function pick(field, value, el) {
       state.answers[field] = value;
       el.closest('.option-grid').querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
       el.classList.add('selected');
     }
- 
+
     function collectFields() {
       if (state.step === 0) { const n = sel('f-name'); if(n) state.answers.name = n.value; }
       if (state.step === 2) {
@@ -757,16 +729,16 @@
         const ph = sel('f-phone'); if(ph) state.answers.contact = ph.value;
       }
     }
- 
+
     function nextStep() { collectFields(); state.step++; renderForm(); }
     function backStep() { collectFields(); state.step--; renderForm(); }
- 
+
     async function submitForm() {
       collectFields();
       state.step = 'loading';
       renderForm();
       const a = state.answers;
- 
+
       try {
         await fetch('https://formspree.io/f/xlgzjryv', {
           method: 'POST',
@@ -779,13 +751,19 @@
           })
         });
       } catch(e) { console.log('Formspree error', e); }
- 
-      const prompt = `You are a compassionate concierge helping a grieving family find a burial or memorial site. Write exactly 3 warm, human sentences. No markdown.
- 
-Name: ${a.name||'not provided'}, Relation: ${a.relation||'not provided'}, Timeline: ${a.timeline||'not provided'}, Service: ${a.type||'not provided'}, Location: ${a.location||'Los Angeles'}, Budget: ${a.budget||'not provided'}, Religion: ${a.religion||'none'}, Notes: ${a.preferences||'none'}
- 
-Write a gentle 3-sentence intro for their match results. Acknowledge their loss, confirm you understood their needs, reassure them the options below were carefully chosen.`;
- 
+
+      const prompt = `You are a compassionate concierge helping a grieving family find a burial or memorial site. No markdown. Write in plain sentences only.
+
+Name: ${a.name||'there'}, Location: ${a.location||'your area'}
+
+Write a single short paragraph starting with "Hey ${a.name||'there'}," that:
+1. Opens with sincere condolences
+2. Reassures them they are not alone
+3. Confirms their request has been received
+4. Mentions that thoughtful options in their area will be sent shortly
+
+Keep it warm, human, and under 4 sentences. Do not mention any listings or options on this page.`;
+
       try {
         const resp = await fetch('https://api.anthropic.com/v1/messages', {
           method: 'POST',
@@ -797,30 +775,34 @@ Write a gentle 3-sentence intro for their match results. Acknowledge their loss,
         });
         const data = await resp.json();
         state.resultText = data.content?.map(b => b.text||'').join('') ||
-          `Thank you${a.name?', '+a.name:''}. We've carefully reviewed your preferences and found three options that we believe would be a meaningful fit for your loved one. Please take all the time you need.`;
+          `Hey ${a.name||'there'}, we're so sorry for your loss. You're not alone in navigating this difficult time. We've received your request and will be in touch shortly with thoughtful options in your area that we hope will feel just right for honoring your loved one.`;
       } catch(e) {
-        state.resultText = `Thank you${a.name?', '+a.name:''}. We've carefully reviewed your preferences and found three options that we believe would be a meaningful fit for your loved one. Please take all the time you need.`;
+        state.resultText = `Hey ${a.name||'there'}, we're so sorry for your loss. You're not alone in navigating this difficult time. We've received your request and will be in touch shortly with thoughtful options in your area that we hope will feel just right for honoring your loved one.`;
       }
       state.step = 'results';
       renderForm();
     }
- 
+
     function restartForm() {
       state.step = 0;
       state.answers = { name:'',relation:'',timeline:'',type:'',religion:'',location:'',budget:'',preferences:'',contact:'',email:'' };
       state.resultText = '';
       renderForm();
     }
- 
+
     function renderForm() {
       const app = sel('form-app');
       if (!app) return;
-      if (state.step === 'loading') { app.innerHTML = renderLoading(); return; }
-      if (state.step === 'results') { app.innerHTML = renderResults(state.resultText); return; }
+      const subtitle = sel('form-subtitle');
+      if (state.step === 'loading' || state.step === 'results') {
+        if (subtitle) subtitle.style.display = 'none';
+        if (state.step === 'loading') { app.innerHTML = renderLoading(); return; }
+        app.innerHTML = renderResults(state.resultText); return;
+      }
+      if (subtitle) subtitle.style.display = '';
       const steps = [renderStep0, renderStep1, renderStep2, renderStep3];
       app.innerHTML = steps[state.step]();
     }
   </script>
 </body>
 </html>
- 
