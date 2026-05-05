@@ -586,7 +586,7 @@
 
     const state = {
       step: 0,
-      answers: { name:'',relation:'',timeline:'',type:'',religion:'',location:'',budget:'',preferences:'',contact:'',email:'' },
+      answers: { name:'',relation:'',timeline:'',type:'',religion:'',location:'',outOfState:'',budget:'',preferences:'',contact:'',email:'' },
       resultText: ''
     };
 
@@ -651,8 +651,21 @@
         <div class="step-body">
           <div class="step-title">A few more details</div>
           <div class="step-sub">This helps us find options that truly fit your family's needs.</div>
-          <label class="field-label">City or ZIP code</label>
-          <input type="text" id="f-loc" placeholder="e.g. Los Angeles, CA or 90210" value="${state.answers.location}">
+          <label class="field-label">Your city or ZIP code</label>
+          <input type="text" id="f-loc" placeholder="e.g. Los Angeles, CA or 90210" value="${state.answers.location}" onblur="onLocationBlur(this)">
+          ${state.answers.location.trim() ? `
+          <label class="field-label" style="margin-top:1.25rem">Did your loved one pass away in a different location?</label>
+          <div class="option-grid" style="grid-template-columns: 1fr 1fr;">
+            ${[['Yes','Yes'],['No','No']].map(([l,v])=>
+              `<div class="option-card ${state.answers.outOfState===v?'selected':''}" onclick="pickAndRender('outOfState','${v}',this)">
+                <div class="option-label">${l}</div>
+              </div>`).join('')}
+          </div>
+          ${state.answers.outOfState === 'Yes' ? `
+          <label class="field-label" style="margin-top:1rem">Where did they pass away? (city or ZIP)</label>
+          <input type="text" id="f-loc-remote" placeholder="e.g. Pittsburgh, PA or 15201" value="${state.answers.locationRemote||''}">
+          ` : ''}
+          ` : ''}
           <label class="field-label" style="margin-top:1.25rem">Approximate budget</label>
           <div class="option-grid">
             ${[['Under $3,000','Under3k'],['$3,000–$8,000','3k8k'],['$8,000–$15,000','8k15k'],['$15,000+','15kPlus'],['Not sure','Unsure']].map(([l,v])=>
@@ -718,10 +731,26 @@
       el.classList.add('selected');
     }
 
+    function pickAndRender(field, value, el) {
+      const loc = sel('f-loc'); if(loc) state.answers.location = loc.value;
+      const locR = sel('f-loc-remote'); if(locR) state.answers.locationRemote = locR.value;
+      const pref = sel('f-pref'); if(pref) state.answers.preferences = pref.value;
+      state.answers[field] = value;
+      renderForm();
+    }
+
+    function onLocationBlur(el) {
+      state.answers.location = el.value;
+      if (state.answers.location.trim()) {
+        renderForm();
+      }
+    }
+
     function collectFields() {
       if (state.step === 0) { const n = sel('f-name'); if(n) state.answers.name = n.value; }
       if (state.step === 2) {
         const l = sel('f-loc'); if(l) state.answers.location = l.value;
+        const lr = sel('f-loc-remote'); if(lr) state.answers.locationRemote = lr.value;
         const p = sel('f-pref'); if(p) state.answers.preferences = p.value;
       }
       if (state.step === 3) {
@@ -747,6 +776,7 @@
             name: a.name, email: a.email, phone: a.contact,
             relation: a.relation, timeline: a.timeline,
             service_type: a.type, location: a.location,
+            out_of_state: a.outOfState, location_of_passing: a.locationRemote||'',
             budget: a.budget, religion: a.religion, notes: a.preferences
           })
         });
@@ -785,7 +815,7 @@ Keep it warm, human, and under 4 sentences. Do not mention any listings or optio
 
     function restartForm() {
       state.step = 0;
-      state.answers = { name:'',relation:'',timeline:'',type:'',religion:'',location:'',budget:'',preferences:'',contact:'',email:'' };
+      state.answers = { name:'',relation:'',timeline:'',type:'',religion:'',location:'',outOfState:'',locationRemote:'',budget:'',preferences:'',contact:'',email:'' };
       state.resultText = '';
       renderForm();
     }
