@@ -419,7 +419,7 @@
     <div class="hero">
       <div class="hero-eyebrow">A free service for families</div>
       <h1>Finding a final resting place<br>should feel <em>peaceful</em>,<br>not overwhelming.</h1>
-      <p class="hero-sub">We guide grieving families through finding the right burial or memorial option — with honesty, care, and absolutely no hidden agendas.</p>
+      <p class="hero-sub">Honest guidance, no pressure, and no hidden agendas — completely free.</p>
       <div class="hero-actions">
         <button class="btn-primary" onclick="showPage('form')">Find a match for your loved one</button>
         <button class="btn-secondary" onclick="showPage('how')">See how it works</button>
@@ -530,7 +530,7 @@
     <div class="about-body">
       <div class="about-section">
         <h2>About the Founder</h2>
-        <p>My name is John, and I'm a computer science student at the University of Southern California. I built Resting Place because the funeral and burial industry — despite serving families at their most vulnerable — has long lacked the transparency they deserve. This is a non-profit service, created to give families a reliable, compassionate resource when they need it most.</p>
+        <p>My name is John, and I'm a computer science graduate of the University of Southern California. I built Resting Place because the funeral and burial industry has long lacked the transparency that families at their most vulnerable deserve. This is a non-profit service, created to give families a reliable, compassionate resource when they need it most.</p>
       </div>
 
       <div class="about-section">
@@ -573,7 +573,7 @@
 
   <footer>
     <strong>Resting Place</strong> — A free service for families in need.<br><br>
-    <span style="font-size:13px; line-height:1.8;">We receive referral fees from some providers. These fees help keep this service running — and any profit generated is donated to families who cannot afford end-of-life arrangements. They never influence match order. Best fit always comes first.<br>Your personal information is kept private and never sold or shared.</span>
+    <span style="font-size:13px; line-height:1.8;">Your personal information is kept private and never sold or shared.</span>
   </footer>
 
   <script>
@@ -706,10 +706,10 @@
       return `<div class="result-wrap">
         <div class="result-intro">${content}</div>
 
-        <div style="text-align:center; padding:2rem 1rem 1rem;">
-          <div style="font-size:40px; margin-bottom:1.25rem;">🌿</div>
+        <div style="text-align:center; padding:1.5rem 1rem 1rem;">
+          <div style="font-size:40px; margin-bottom:1rem;">🌿</div>
           <div style="font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:300; color:var(--ink); margin-bottom:0.75rem;">Your matches are on their way.</div>
-          <p style="font-size:16px; color:var(--ink-mid); line-height:1.75; max-width:400px; margin:0 auto;">We're reviewing providers that fit your situation and will send your match report to <strong style="color:var(--ink)">${state.answers.email || 'your email'}</strong> within a few hours.</p>
+          <p style="font-size:16px; color:var(--ink-mid); line-height:1.75; max-width:400px; margin:0 auto;">We will send your match report to <strong style="color:var(--ink)">${state.answers.email || 'your email'}</strong> within a few hours.</p>
         </div>
 
         <div style="background:#f9f7f4; border-radius:var(--radius-lg); padding:1.35rem 1.5rem; margin-top:2rem;">
@@ -722,7 +722,7 @@
         <p style="font-size:14px; color:var(--ink-mid); text-align:center; margin-top:1.5rem; line-height:1.7;">Questions in the meantime? Reply to your confirmation email<br>and we'll get back to you as soon as possible.</p>
       </div>
       <button class="restart-btn" onclick="restartForm()">← Start a new search</button>
-      <div class="disclaimer">Resting Place receives referral fees from some providers. This never influences match order — best fit always comes first. Your personal information is kept private and never sold or shared.</div>`;
+      <div class="disclaimer">Your personal information is kept private and never sold or shared.</div>`;
     }
 
     function pick(field, value, el) {
@@ -784,15 +784,13 @@
 
       const prompt = `You are a compassionate concierge helping a grieving family find a burial or memorial site. No markdown. Write in plain sentences only.
 
-Name: ${a.name||'there'}, Location: ${a.location||'your area'}
+Name: ${a.name||'there'}
 
-Write a single short paragraph starting with "Hey ${a.name||'there'}," that:
-1. Opens with sincere condolences
-2. Reassures them they are not alone
-3. Confirms their request has been received
-4. Mentions that thoughtful options in their area will be sent shortly
+Write a single short 2 sentence message starting with "Hey ${a.name||'there'}," that:
+1. Confirms their request has been received and we are here to walk alongside them
+2. Reassures them they do not have to navigate this alone
 
-Keep it warm, human, and under 4 sentences. Do not mention any listings or options on this page.`;
+Do not mention sorry, loss, or death directly. Keep it warm, steady, and under 2 sentences.`;
 
       try {
         const resp = await fetch('https://api.anthropic.com/v1/messages', {
@@ -805,9 +803,9 @@ Keep it warm, human, and under 4 sentences. Do not mention any listings or optio
         });
         const data = await resp.json();
         state.resultText = data.content?.map(b => b.text||'').join('') ||
-          `Hey ${a.name||'there'}, we're so sorry for your loss. You're not alone in navigating this difficult time. We've received your request and will be in touch shortly with thoughtful options in your area that we hope will feel just right for honoring your loved one.`;
+          `Hey ${a.name||'there'}, your request has been received and we are here to walk alongside you every step of the way. During this incredibly difficult time, you do not have to navigate everything alone.`;
       } catch(e) {
-        state.resultText = `Hey ${a.name||'there'}, we're so sorry for your loss. You're not alone in navigating this difficult time. We've received your request and will be in touch shortly with thoughtful options in your area that we hope will feel just right for honoring your loved one.`;
+        state.resultText = `Hey ${a.name||'there'}, your request has been received and we are here to walk alongside you every step of the way. During this incredibly difficult time, you do not have to navigate everything alone.`;
       }
       state.step = 'results';
       renderForm();
