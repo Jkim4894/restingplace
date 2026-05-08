@@ -129,7 +129,7 @@
       gap: 2.5rem;
     }
     .promise-item { display: flex; flex-direction: column; gap: 0.6rem; }
-    .promise-icon { font-size: 26px; margin-bottom: 0.25rem; }
+    .promise-icon { width: 32px; height: 32px; margin-bottom: 0.25rem; }
     .promise-title { font-size: 18px; font-weight: 500; color: var(--ink); }
     .promise-desc { font-size: 16px; color: var(--ink-mid); line-height: 1.65; }
 
@@ -366,24 +366,24 @@
     }
     .blacklist-box p { font-size: 16px; color: var(--ink); line-height: 1.75; margin: 0; }
     .values-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      display: grid; grid-template-columns: repeat(2, 1fr);
       gap: 1.25rem; margin-top: 1.5rem;
     }
     .value-card {
       background: white; border: 0.5px solid var(--border);
       border-radius: var(--radius-lg); padding: 1.5rem;
     }
-    .value-icon { font-size: 26px; margin-bottom: 0.75rem; }
+    .value-icon { width: 28px; height: 28px; margin-bottom: 0.75rem; }
     .value-title { font-size: 16px; font-weight: 500; color: var(--ink); margin-bottom: 0.4rem; }
     .value-desc { font-size: 14px; color: var(--ink-mid); line-height: 1.6; }
 
     /* FOOTER */
     footer {
-      background: var(--ink); color: rgba(255,255,255,0.5);
+      background: #2d4229; color: rgba(255,255,255,0.6);
       text-align: center; padding: 2.5rem 2rem;
       font-size: 14px; line-height: 1.8;
     }
-    footer strong { color: rgba(255,255,255,0.85); }
+    footer strong { color: rgba(255,255,255,0.9); }
 
     /* MOBILE */
     @media (max-width: 600px) {
@@ -454,17 +454,25 @@
     <div class="promise-strip">
       <div class="promise-inner">
         <div class="promise-item">
-          <div class="promise-icon">🛡️</div>
+          <svg class="promise-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 3L4 8v8c0 6.6 5.1 12.8 12 14.3C22.9 28.8 28 22.6 28 16V8L16 3z" stroke="#4a6741" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+            <path d="M11 16l3.5 3.5L21 12" stroke="#4a6741" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
           <div class="promise-title">Every provider is vetted</div>
           <div class="promise-desc">Poor reviews, hidden fees, or predatory practices — permanently blacklisted, no exceptions.</div>
         </div>
         <div class="promise-item">
-          <div class="promise-icon">🌿</div>
+          <svg class="promise-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 6c-4 0-8 3-8 8 0 6 8 13 8 13s8-7 8-13c0-5-4-8-8-8z" stroke="#4a6741" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+            <circle cx="16" cy="14" r="2.5" stroke="#4a6741" stroke-width="1.8" fill="none"/>
+          </svg>
           <div class="promise-title">All options, no pressure</div>
           <div class="promise-desc">We match you to what's right for your family and your budget — not what earns us the most.</div>
         </div>
         <div class="promise-item">
-          <div class="promise-icon">💛</div>
+          <svg class="promise-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 28s-11-7-11-15a7 7 0 0 1 11-5.7A7 7 0 0 1 27 13c0 8-11 15-11 15z" stroke="#4a6741" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+          </svg>
           <div class="promise-title">Built with compassion</div>
           <div class="promise-desc">Every family deserves honest, clear guidance during the hardest moments of their lives.</div>
         </div>
@@ -564,22 +572,33 @@
         <h2>What We Stand For</h2>
         <div class="values-grid">
           <div class="value-card">
-            <div class="value-icon">🔍</div>
+            <svg class="value-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="14" cy="10" r="5" stroke="#4a6741" stroke-width="1.6" fill="none"/>
+              <path d="M6 24c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="#4a6741" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+            </svg>
             <div class="value-title">Transparency</div>
             <div class="value-desc">Open about how we operate. No hidden agendas.</div>
           </div>
           <div class="value-card">
-            <div class="value-icon">🛡️</div>
+            <svg class="value-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 3L4 7.5v7c0 5.8 4.4 11.2 10 12.5 5.6-1.3 10-6.7 10-12.5v-7L14 3z" stroke="#4a6741" stroke-width="1.6" stroke-linejoin="round" fill="none"/>
+              <path d="M10 14l3 3 5-5" stroke="#4a6741" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
             <div class="value-title">Protection</div>
             <div class="value-desc">We vet every provider so grieving families never have to.</div>
           </div>
           <div class="value-card">
-            <div class="value-icon">💛</div>
+            <svg class="value-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 24s-9-6-9-13a6 6 0 0 1 9-5.2A6 6 0 0 1 23 11c0 7-9 13-9 13z" stroke="#4a6741" stroke-width="1.6" stroke-linejoin="round" fill="none"/>
+            </svg>
             <div class="value-title">Compassion</div>
             <div class="value-desc">Every decision here was made with families in mind.</div>
           </div>
           <div class="value-card">
-            <div class="value-icon">🌿</div>
+            <svg class="value-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="14" cy="14" r="10" stroke="#4a6741" stroke-width="1.6" fill="none"/>
+              <path d="M14 8v6l4 2" stroke="#4a6741" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
             <div class="value-title">Accessibility</div>
             <div class="value-desc">Free for every family. Always.</div>
           </div>
