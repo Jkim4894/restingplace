@@ -10,7 +10,6 @@
       --sage: #4a6741;
       --sage-light: #e8f0e6;
       --sage-mid: #8aab85;
-      --cream: #faf8f4;
       --ink: #2a2721;
       --ink-mid: #5a574f;
       --border: #e5e2dc;
@@ -58,10 +57,6 @@
     }
     .nav-cta:hover { opacity: 0.85; }
 
-    /* PAGES */
-    .page { display: none; }
-    .page.active { display: block; }
-
     /* BUTTONS */
     .btn-primary {
       font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 500;
@@ -80,7 +75,7 @@
     }
     .btn-secondary:hover { border-color: var(--sage-mid); }
 
-    /* HOME */
+    /* HERO */
     .hero {
       min-height: calc(100vh - 64px);
       display: flex; flex-direction: column;
@@ -121,6 +116,7 @@
     }
     .trust-label { font-size: 14px; color: var(--ink-mid); text-align: center; }
 
+    /* PROMISE STRIP */
     .promise-strip {
       background: white;
       border-top: 0.5px solid var(--border);
@@ -137,8 +133,13 @@
     .promise-title { font-size: 18px; font-weight: 500; color: var(--ink); }
     .promise-desc { font-size: 16px; color: var(--ink-mid); line-height: 1.65; }
 
-    /* HOW IT WORKS */
+    /* SECTIONS */
     .section { max-width: 860px; margin: 0 auto; padding: 5rem 2rem; }
+    .section-divider {
+      border: none;
+      border-top: 0.5px solid var(--border);
+      margin: 0;
+    }
     .section-eyebrow {
       font-size: 13px; font-weight: 500;
       letter-spacing: 0.14em; text-transform: uppercase;
@@ -153,6 +154,8 @@
       font-size: 19px; color: var(--ink-mid);
       max-width: 600px; line-height: 1.7; margin-bottom: 3.5rem;
     }
+
+    /* HOW IT WORKS */
     .step-row {
       display: grid; grid-template-columns: 72px 1fr;
       gap: 2rem; padding: 2.5rem 0;
@@ -179,9 +182,37 @@
     }
     .hiw-cta-text p { font-size: 16px; color: var(--ink-mid); }
 
-    /* FORM */
-    .form-page-wrap {
-      min-height: calc(100vh - 64px); background: var(--bg);
+    /* FORM OVERLAY */
+    .form-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--bg);
+      z-index: 200;
+      overflow-y: auto;
+    }
+    .form-overlay.active { display: block; }
+    .form-overlay-nav {
+      position: sticky; top: 0; z-index: 201;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 0.5px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem; height: 64px;
+    }
+    .form-overlay-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 400; color: var(--ink);
+    }
+    .form-overlay-logo span { color: var(--sage); }
+    .btn-close-form {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px; color: var(--ink-mid);
+      background: none; border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 8px 16px; cursor: pointer;
+    }
+    .form-overlay-body {
       display: flex; align-items: flex-start;
       justify-content: center; padding: 3rem 1.5rem 5rem;
     }
@@ -193,11 +224,6 @@
     .form-header {
       padding: 2.5rem 2.5rem 2rem;
       border-bottom: 0.5px solid var(--border);
-    }
-    .form-eyebrow {
-      font-size: 12px; font-weight: 500;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--sage); margin-bottom: 0.6rem;
     }
     .form-header h2 {
       font-family: 'Cormorant Garamond', serif;
@@ -287,33 +313,6 @@
       font-size: 17px; color: var(--ink-mid); line-height: 1.8;
       margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 0.5px solid var(--border);
     }
-    .match-card {
-      border: 0.5px solid var(--border); border-radius: var(--radius-lg);
-      padding: 1.35rem 1.5rem; margin-bottom: 14px;
-    }
-    .match-card.top-pick { border-color: var(--sage); border-width: 1.5px; }
-    .match-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
-    .match-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: var(--ink); }
-    .match-type { font-size: 13px; color: var(--ink-mid); margin-top: 2px; }
-    .best-badge {
-      font-size: 11px; font-weight: 500; background: var(--sage-light);
-      color: var(--sage); padding: 4px 10px; border-radius: 20px; white-space: nowrap;
-    }
-    .match-details { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
-    .detail-item { font-size: 12px; color: var(--ink-mid); }
-    .detail-value { font-size: 15px; font-weight: 500; color: var(--ink); margin-top: 2px; }
-    .match-note { font-size: 14px; color: var(--ink-mid); line-height: 1.65; padding-top: 10px; border-top: 0.5px solid var(--border); }
-    .match-actions { display: flex; gap: 10px; margin-top: 12px; }
-    .btn-contact {
-      font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
-      color: white; background: var(--sage); border: none;
-      border-radius: var(--radius-md); padding: 9px 16px; cursor: pointer;
-    }
-    .btn-learn {
-      font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--ink-mid);
-      background: none; border: 0.5px solid var(--border);
-      border-radius: var(--radius-md); padding: 9px 16px; cursor: pointer;
-    }
     .next-steps { background: #f9f7f4; border-radius: var(--radius-lg); padding: 1.35rem 1.5rem; margin-top: 1.25rem; }
     .next-steps-title {
       font-size: 13px; font-weight: 500; text-transform: uppercase;
@@ -395,7 +394,7 @@
       .nav-links a:last-child { border-bottom: none; margin-top: 0.5rem; text-align: center; }
       .nav-cta { border-radius: var(--radius-md); padding: 10px 20px; }
       .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; }
-      .hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; transition: all 0.2s; }
+      .hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; }
       .step-body { padding: 1.5rem 1.25rem 1rem; }
       .form-header { padding: 1.75rem 1.25rem 1.5rem; }
       .progress-bar { padding: 1rem 1.25rem; }
@@ -414,27 +413,27 @@
 <body>
 
   <nav>
-    <div class="nav-logo" onclick="showPage('home')">Resting<span>Place</span></div>
+    <div class="nav-logo" onclick="scrollToSection('home')">Resting<span>Place</span></div>
     <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
     <div class="nav-links" id="nav-links">
-      <a onclick="showPage('home');closeMenu()">Home</a>
-      <a onclick="showPage('how');closeMenu()">How It Works</a>
-      <a onclick="showPage('about');closeMenu()">About</a>
-      <a class="nav-cta" onclick="showPage('form');closeMenu()">Find a Match</a>
+      <a onclick="scrollToSection('home');closeMenu()">Home</a>
+      <a onclick="scrollToSection('how');closeMenu()">How It Works</a>
+      <a onclick="scrollToSection('about');closeMenu()">About</a>
+      <a class="nav-cta" onclick="openForm();closeMenu()">Find a Match</a>
     </div>
   </nav>
 
   <!-- HOME -->
-  <div id="page-home" class="page active">
+  <section id="home">
     <div class="hero">
       <div class="hero-eyebrow">A free service for families</div>
       <h1>Finding a final resting place<br>should feel <em>peaceful</em>,<br>not overwhelming.</h1>
       <p class="hero-sub">Honest guidance, no pressure, and no hidden agendas — completely free.</p>
       <div class="hero-actions">
-        <button class="btn-primary" onclick="showPage('form')">Find a match for your loved one</button>
-        <button class="btn-secondary" onclick="showPage('how')">See how it works</button>
+        <button class="btn-primary" onclick="openForm()">Find a match for your loved one</button>
+        <button class="btn-secondary" onclick="scrollToSection('how')">See how it works</button>
       </div>
       <div class="trust-row">
         <div class="trust-item">
@@ -471,9 +470,12 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div id="page-how" class="page">
+  <hr class="section-divider">
+
+  <!-- HOW IT WORKS -->
+  <section id="how" style="background:white;">
     <div class="section">
       <div class="section-eyebrow">The process</div>
       <h2>Simple, gentle,<br>and completely free.</h2>
@@ -512,14 +514,18 @@
           <h3>Ready to find the right place?</h3>
           <p>It takes two minutes. It costs nothing.</p>
         </div>
-        <button class="btn-primary" onclick="showPage('form')">Get started</button>
+        <button class="btn-primary" onclick="openForm()">Get started</button>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- FORM -->
-  <div id="page-form" class="page">
-    <div class="form-page-wrap">
+  <!-- FORM OVERLAY -->
+  <div class="form-overlay" id="form-overlay">
+    <div class="form-overlay-nav">
+      <div class="form-overlay-logo">Resting<span>Place</span></div>
+      <button class="btn-close-form" onclick="closeForm()">← Back</button>
+    </div>
+    <div class="form-overlay-body">
       <div class="form-card">
         <div class="form-header">
           <h2>Find the right place<br><em style="font-style:italic;color:var(--sage)">for your loved one</em></h2>
@@ -531,7 +537,7 @@
   </div>
 
   <!-- ABOUT -->
-  <div id="page-about" class="page">
+  <section id="about">
     <div class="about-hero">
       <div class="section-eyebrow">Our story</div>
       <h1>Built for families,<br>not for profit.</h1>
@@ -579,11 +585,11 @@
           </div>
         </div>
         <p style="margin-top:2rem;">
-          <button class="btn-primary" onclick="showPage('form')">Find a match for your loved one</button>
+          <button class="btn-primary" onclick="openForm()">Find a match for your loved one</button>
         </p>
       </div>
     </div>
-  </div>
+  </section>
 
   <footer>
     <strong>Resting Place</strong> — A free service for families in need.<br><br>
@@ -592,26 +598,37 @@
   </footer>
 
   <script>
+    function openForm() {
+      document.getElementById('form-overlay').classList.add('active');
+      document.body.style.overflow = 'hidden';
+      renderForm();
+    }
+
+    function closeForm() {
+      document.getElementById('form-overlay').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const navHeight = 64;
+      const top = el.getBoundingClientRect().top + window.scrollY - navHeight;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+
     function toggleMenu() {
-      const nav = document.getElementById('nav-links');
-      nav.classList.toggle('open');
+      document.getElementById('nav-links').classList.toggle('open');
     }
 
     function closeMenu() {
-      const nav = document.getElementById('nav-links');
-      nav.classList.remove('open');
+      document.getElementById('nav-links').classList.remove('open');
     }
 
-    function showPage(id) {
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      document.getElementById('page-' + id).classList.add('active');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      if (id === 'form') renderForm();
-    }
-
+    // FORM
     const state = {
       step: 0,
-      answers: { name:'',relation:'',timeline:'',type:'',religion:'',location:'',outOfState:'',budget:'',preferences:'',contact:'',email:'' },
+      answers: { name:'',relation:'',timeline:'',type:'',religion:'',location:'',outOfState:'',locationRemote:'',budget:'',preferences:'',contact:'',email:'' },
       resultText: ''
     };
 
@@ -689,8 +706,7 @@
           ${state.answers.outOfState === 'Yes' ? `
           <label class="field-label" style="margin-top:1rem">Where did they pass away? (city or ZIP)</label>
           <input type="text" id="f-loc-remote" placeholder="e.g. Pittsburgh, PA or 15201" value="${state.answers.locationRemote||''}">
-          ` : ''}
-          ` : ''}
+          ` : ''}` : ''}
           <label class="field-label" style="margin-top:1.25rem">Approximate budget</label>
           <div class="option-grid">
             ${[['Under $3,000','Under3k'],['$3,000–$8,000','3k8k'],['$8,000–$15,000','8k15k'],['$15,000+','15kPlus'],['Not sure','Unsure']].map(([l,v])=>
@@ -702,7 +718,7 @@
               `<div class="option-card ${state.answers.religion===v?'selected':''}" onclick="pick('religion','${v}',this)"><div class="option-label">${l}</div></div>`).join('')}
           </div>
           <label class="field-label" style="margin-top:1.25rem">Anything else we should know? <span style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
-          <textarea id="f-pref" placeholder="e.g. needs to be near family, veteran benefits, peaceful setting, wheelchair accessible...">${state.answers.preferences}</textarea>
+          <textarea id="f-pref" placeholder="e.g. needs to be near family, veteran benefits, peaceful setting...">${state.answers.preferences}</textarea>
         </div>
         <div class="nav-row"><button class="btn-back" onclick="backStep()">← Back</button><button class="btn-next" onclick="nextStep()">Continue →</button></div>`;
     }
@@ -730,21 +746,18 @@
     function renderResults(content) {
       return `<div class="result-wrap">
         <div class="result-intro">${content}</div>
-
         <div style="text-align:center; padding:1.5rem 1rem 1rem;">
           <div style="font-size:40px; margin-bottom:1rem;">🌿</div>
           <div style="font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:300; color:var(--ink); margin-bottom:0.75rem;">Your matches are on their way.</div>
           <p style="font-size:16px; color:var(--ink-mid); line-height:1.75; max-width:400px; margin:0 auto;">We will send your match report to <strong style="color:var(--ink)">${state.answers.email || 'your email'}</strong> within a few hours.</p>
         </div>
-
         <div style="background:#f9f7f4; border-radius:var(--radius-lg); padding:1.35rem 1.5rem; margin-top:2rem;">
           <div style="font-size:13px; font-weight:500; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-mid); margin-bottom:1rem;">What happens next</div>
           <div class="next-step-item"><div class="step-num">1</div>We review providers that match your location, budget, and preferences.</div>
           <div class="next-step-item"><div class="step-num">2</div>Only vetted, fairly-priced options are included — nothing predatory, ever.</div>
           <div class="next-step-item"><div class="step-num">3</div>Your report arrives by email. No sales calls, no pressure — just honest options.</div>
         </div>
-
-        <p style="font-size:14px; color:var(--ink-mid); text-align:center; margin-top:1.5rem; line-height:1.7;">Questions in the meantime? Reply to your confirmation email<br>and we'll get back to you as soon as possible.</p>
+        <p style="font-size:14px; color:var(--ink-mid); text-align:center; margin-top:1.5rem; line-height:1.7;">Questions in the meantime? Reply to your confirmation email and we'll get back to you as soon as possible.</p>
       </div>
       <button class="restart-btn" onclick="restartForm()">← Start a new search</button>
       <div class="disclaimer">Your personal information is kept private and never sold or shared.</div>`;
@@ -766,9 +779,7 @@
 
     function onLocationBlur(el) {
       state.answers.location = el.value;
-      if (state.answers.location.trim()) {
-        renderForm();
-      }
+      if (state.answers.location.trim()) renderForm();
     }
 
     function collectFields() {
@@ -856,6 +867,8 @@ Do not mention sorry, loss, or death directly. Keep it warm, steady, and under 2
       const steps = [renderStep0, renderStep1, renderStep2, renderStep3];
       app.innerHTML = steps[state.step]();
     }
+
+    renderForm();
   </script>
 </body>
 </html>
