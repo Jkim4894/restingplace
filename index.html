@@ -430,7 +430,7 @@
     <div class="hero">
       <div class="hero-eyebrow">A free service for families</div>
       <h1>Finding a final resting place<br>should feel <em>peaceful</em>,<br>not overwhelming.</h1>
-      <p class="hero-sub">Honest guidance, no pressure, and no hidden agendas — completely free.</p>
+      <p class="hero-sub">So you're not walking into a funeral home blind.</p>
       <div class="hero-actions">
         <button class="btn-primary" onclick="openForm()">Find a match for your loved one</button>
         <button class="btn-secondary" onclick="scrollToSection('how')">See how it works</button>
@@ -459,7 +459,7 @@
             <path d="M11 16l3.5 3.5L21 12" stroke="#4a6741" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           <div class="promise-title">Every provider is vetted</div>
-          <div class="promise-desc">Poor reviews, hidden fees, or predatory practices — permanently blacklisted, no exceptions.</div>
+          <div class="promise-desc">We research reviews, pricing, and complaint records. Predatory providers are permanently blacklisted — no exceptions.</div>
         </div>
         <div class="promise-item">
           <svg class="promise-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -498,15 +498,15 @@
       <div class="step-row">
         <div class="step-number">02</div>
         <div class="step-content">
-          <h3>We find your best matches</h3>
-          <p>We identify the providers that are the best fit for your family — based on your needs, not on who pays us the most.</p>
+          <h3>We research and vet your options</h3>
+          <p>We research providers in your area using publicly available pricing, reviews, and complaint records. Anyone with a history of hidden fees or predatory practices is permanently blacklisted and never shown to families.</p>
         </div>
       </div>
       <div class="step-row">
         <div class="step-number">03</div>
         <div class="step-content">
-          <h3>You receive a match report by email</h3>
-          <p>Pricing, distance, availability — sent directly to your inbox. No sales calls, no pressure.</p>
+          <h3>You receive a personalized report by email</h3>
+          <p>We send you our recommended options along with the questions to ask before you sign anything — so you have the information most families only wish they'd had going in.</p>
         </div>
       </div>
       <div class="step-row">
@@ -712,20 +712,8 @@
         <div class="step-body">
           <div class="step-title">A few more details</div>
           <div class="step-sub">This helps us find options that truly fit your family's needs.</div>
-          <label class="field-label">Your city or ZIP code</label>
+          <label class="field-label">Where do services need to be arranged?</label>
           <input type="text" id="f-loc" placeholder="e.g. Los Angeles, CA or 90210" value="${state.answers.location}" onblur="onLocationBlur(this)">
-          ${state.answers.location.trim() ? `
-          <label class="field-label" style="margin-top:1.25rem">Did your loved one pass away in a different location?</label>
-          <div class="option-grid" style="grid-template-columns: 1fr 1fr;">
-            ${[['Yes','Yes'],['No','No']].map(([l,v])=>
-              `<div class="option-card ${state.answers.outOfState===v?'selected':''}" onclick="pickAndRender('outOfState','${v}',this)">
-                <div class="option-label">${l}</div>
-              </div>`).join('')}
-          </div>
-          ${state.answers.outOfState === 'Yes' ? `
-          <label class="field-label" style="margin-top:1rem">Where did they pass away? (city or ZIP)</label>
-          <input type="text" id="f-loc-remote" placeholder="e.g. Pittsburgh, PA or 15201" value="${state.answers.locationRemote||''}">
-          ` : ''}` : ''}
           <label class="field-label" style="margin-top:1.25rem">Approximate budget</label>
           <div class="option-grid">
             ${[['Under $3,000','Under3k'],['$3,000–$8,000','3k8k'],['$8,000–$15,000','8k15k'],['$15,000+','15kPlus'],['Not sure','Unsure']].map(([l,v])=>
@@ -737,7 +725,7 @@
               `<div class="option-card ${state.answers.religion===v?'selected':''}" onclick="pick('religion','${v}',this)"><div class="option-label">${l}</div></div>`).join('')}
           </div>
           <label class="field-label" style="margin-top:1.25rem">Anything else we should know? <span style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
-          <textarea id="f-pref" placeholder="e.g. needs to be near family, veteran benefits, peaceful setting...">${state.answers.preferences}</textarea>
+          <textarea id="f-pref" placeholder="e.g. specific county or city needed, working with a charity, no family available, veteran status, wheelchair accessible...">${state.answers.preferences}</textarea>
         </div>
         <div class="nav-row"><button class="btn-back" onclick="backStep()">← Back</button><button class="btn-next" onclick="nextStep()">Continue →</button></div>`;
     }
@@ -779,7 +767,7 @@
         <p style="font-size:14px; color:var(--ink-mid); text-align:center; margin-top:1.5rem; line-height:1.7;">Questions in the meantime? Reply to your confirmation email and we'll get back to you as soon as possible.</p>
       </div>
       <button class="restart-btn" onclick="restartForm()">← Start a new search</button>
-      <div class="disclaimer">Your personal information is kept private and never sold or shared.</div>`;
+      <div class="disclaimer">Pricing in reports is based on publicly available information and may vary. Always request a written itemized quote before committing to any provider.<br><br>Your personal information is kept private and never sold or shared.</div>`;
     }
 
     function pick(field, value, el) {
@@ -830,8 +818,7 @@
           body: JSON.stringify({
             name: a.name, email: a.email, phone: a.contact,
             relation: a.relation, timeline: a.timeline,
-            service_type: a.type, location: a.location,
-            out_of_state: a.outOfState, location_of_passing: a.locationRemote||'',
+            service_type: a.type, services_location: a.location,
             budget: a.budget, religion: a.religion, notes: a.preferences
           })
         });
