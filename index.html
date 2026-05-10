@@ -647,7 +647,7 @@
     // FORM
     const state = {
       step: 0,
-      answers: { name:'',relation:'',timeline:'',type:'',religion:'',location:'',outOfState:'',locationRemote:'',budget:'',preferences:'',contact:'',email:'' },
+      answers: { name:'',relation:'',timeline:'',type:'',religion:'',religionOther:'',location:'',outOfState:'',locationRemote:'',budget:'',preferences:'',contact:'',email:'' },
       resultText: ''
     };
 
@@ -719,11 +719,15 @@
             ${[['Under $3,000','Under3k'],['$3,000–$8,000','3k8k'],['$8,000–$15,000','8k15k'],['$15,000+','15kPlus'],['Not sure','Unsure']].map(([l,v])=>
               `<div class="option-card ${state.answers.budget===v?'selected':''}" onclick="pick('budget','${v}',this)"><div class="option-label">${l}</div></div>`).join('')}
           </div>
-          <label class="field-label" style="margin-top:1.25rem">Religious or cultural preferences</label>
+          <label class="field-label" style="margin-top:1.25rem">Religious or cultural tradition</label>
           <div class="option-grid">
             ${[['Catholic','Catholic'],['Jewish','Jewish'],['Muslim','Muslim'],['Buddhist','Buddhist'],['Non-religious','None'],['Other','Other']].map(([l,v])=>
-              `<div class="option-card ${state.answers.religion===v?'selected':''}" onclick="pick('religion','${v}',this)"><div class="option-label">${l}</div></div>`).join('')}
+              `<div class="option-card ${state.answers.religion===v?'selected':''}" onclick="pickAndRender('religion','${v}',this)"><div class="option-label">${l}</div></div>`).join('')}
           </div>
+          ${state.answers.religion === 'Other' ? `
+          <label class="field-label" style="margin-top:1rem">Please specify your tradition</label>
+          <input type="text" id="f-religion-other" placeholder="e.g. Hindu, Greek Orthodox, Sikh..." value="${state.answers.religionOther||''}">
+          ` : ''}
           <label class="field-label" style="margin-top:1.25rem">Anything else we should know? <span style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
           <textarea id="f-pref" placeholder="e.g. specific county or city needed, working with a charity, no family available, veteran status, wheelchair accessible...">${state.answers.preferences}</textarea>
         </div>
@@ -794,6 +798,7 @@
       if (state.step === 2) {
         const l = sel('f-loc'); if(l) state.answers.location = l.value;
         const lr = sel('f-loc-remote'); if(lr) state.answers.locationRemote = lr.value;
+        const ro = sel('f-religion-other'); if(ro) state.answers.religionOther = ro.value;
         const p = sel('f-pref'); if(p) state.answers.preferences = p.value;
       }
       if (state.step === 3) {
@@ -819,7 +824,7 @@
             name: a.name, email: a.email, phone: a.contact,
             relation: a.relation, timeline: a.timeline,
             service_type: a.type, services_location: a.location,
-            budget: a.budget, religion: a.religion, notes: a.preferences
+            budget: a.budget, religion: a.religion === 'Other' ? (a.religionOther || 'Other') : a.religion, notes: a.preferences
           })
         });
       } catch(e) { console.log('Formspree error', e); }
@@ -855,7 +860,7 @@ Do not mention sorry, loss, or death directly. Keep it warm, steady, and under 2
 
     function restartForm() {
       state.step = 0;
-      state.answers = { name:'',relation:'',timeline:'',type:'',religion:'',location:'',outOfState:'',locationRemote:'',budget:'',preferences:'',contact:'',email:'' };
+      state.answers = { name:'',relation:'',timeline:'',type:'',religion:'',religionOther:'',location:'',outOfState:'',locationRemote:'',budget:'',preferences:'',contact:'',email:'' };
       state.resultText = '';
       renderForm();
     }
