@@ -798,7 +798,18 @@
             budget: a.budget, religion: a.religion === 'Other' ? (a.religionOther || 'Other') : a.religion, notes: a.preferences
           })
         });
-      } catch(e) { console.log('Formspree error', e); }
+
+        await fetch('https://hook.us2.make.com/5mtrdtpqkjm47e6jhlzfocuantnbnbn7', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: a.name, email: a.email, phone: a.contact,
+            relation: a.relation, timeline: a.timeline,
+            service_type: a.type, services_location: a.location,
+            budget: a.budget, religion: a.religion === 'Other' ? (a.religionOther || 'Other') : a.religion, notes: a.preferences
+          })
+        });
+      } catch(e) { console.log('Submission error', e); }
 
       const prompt = `You are a compassionate concierge helping a grieving family find a burial or memorial site. No markdown. Write in plain sentences only.
 
