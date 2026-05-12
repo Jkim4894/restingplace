@@ -420,8 +420,8 @@
     </button>
     <div class="nav-links" id="nav-links">
       <a onclick="scrollToSection('home');closeMenu()">Home</a>
+      <a onclick="scrollToSection('about');closeMenu()">Our Story</a>
       <a onclick="scrollToSection('how');closeMenu()">How It Works</a>
-      <a onclick="scrollToSection('about');closeMenu()">About</a>
       <a class="nav-cta" onclick="openForm();closeMenu()">Find a Match</a>
     </div>
   </nav>
@@ -431,7 +431,7 @@
     <div class="hero">
       <div class="hero-eyebrow">A free service for families</div>
       <h1>Finding a final resting place<br>should feel <em>peaceful</em>,<br>not overwhelming.</h1>
-      <p class="hero-sub">So you're not walking into a funeral home blind.</p>
+      <p class="hero-sub">So you're not navigating this alone.</p>
       <div class="hero-actions">
         <button class="btn-primary" onclick="openForm()">Find a match for your loved one</button>
         <button class="btn-secondary" onclick="scrollToSection('how')">See how it works</button>
@@ -468,7 +468,7 @@
             <circle cx="16" cy="14" r="2.5" stroke="#4a6741" stroke-width="1.8" fill="none"/>
           </svg>
           <div class="promise-title">All options, no pressure</div>
-          <div class="promise-desc">We match you to what's right for your family and your budget — not what earns us the most.</div>
+          <div class="promise-desc">We match you to what's right for your family and your budget.</div>
         </div>
         <div class="promise-item">
           <svg class="promise-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -483,8 +483,40 @@
 
   <hr class="section-divider">
 
-  <!-- HOW IT WORKS -->
-  <section id="how" style="background:white;">
+  <!-- ABOUT — white background, comes first after home -->
+  <section id="about" style="background:white;">
+    <div class="about-body" style="max-width:740px; margin:0 auto; padding:4rem 2rem 5rem;">
+      <div class="about-section">
+        <div class="section-eyebrow">Our story</div>
+        <h2 style="font-family:'Cormorant Garamond',serif; font-size:clamp(32px,5vw,48px); font-weight:300; color:var(--ink); margin-bottom:1.5rem;">Built for families,<br>not for profit.</h2>
+        <div style="display:flex; gap:2rem; align-items:flex-start; flex-wrap:wrap;">
+          <img src="https://i.imgur.com/92tycqq.jpeg" alt="John" style="width:120px; height:120px; border-radius:50%; object-fit:cover; object-position:center top; flex-shrink:0; border: 3px solid var(--sage-light);">
+          <div style="flex:1; min-width:220px;">
+            <p style="font-size:17px; color:var(--ink-mid); line-height:1.85;">My name is John. I'm a computer science graduate of USC, and I built Resting Place because of something that happened to my family that I still think about.</p>
+            <p style="margin-top:0.85rem; font-size:17px; color:var(--ink-mid); line-height:1.85;">When my beloved granddad passed away, we were lost. None of us had ever done this before. We didn't know what questions to ask, what things should cost, or who to trust. A funeral home took advantage of that. We ended up with a service that wasn't right for us, and that cost us more than we could bear.</p>
+            <p style="margin-top:0.85rem; font-size:17px; color:var(--ink-mid); line-height:1.85;">That experience made me realize how vulnerable families are when they have to make expensive, unfamiliar decisions while grieving. And how little protection they have. The information they need exists. It's just buried in industry language most people have never seen before.</p>
+            <p style="margin-top:0.85rem; font-size:17px; color:var(--ink-mid); line-height:1.85;">Resting Place is my attempt to fix that. To make sure the next family doesn't have to figure it out the hard way.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-section" style="margin-top:3rem;">
+        <h2 style="font-family:'Cormorant Garamond',serif; font-size:32px; font-weight:400; color:var(--ink); margin-bottom:1rem; padding-bottom:0.75rem; border-bottom:0.5px solid var(--border);">Our Standards</h2>
+        <div class="blacklist-box">
+          <p><strong>Any provider with a history of hidden fees, upcharging, or predatory practices is permanently blacklisted.</strong> No exceptions.</p>
+        </div>
+      </div>
+
+      <p style="margin-top:2.5rem;">
+        <button class="btn-primary" onclick="openForm()">Find a match for your loved one</button>
+      </p>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- HOW IT WORKS — warm gradient background, comes after About -->
+  <section id="how" style="background:linear-gradient(160deg,#f9f7f3 0%,#eef0ea 100%);">
     <div class="section">
       <div class="section-eyebrow">The process</div>
       <h2>Simple, gentle,<br>and completely free.</h2>
@@ -518,7 +550,7 @@
         </div>
       </div>
 
-      <div style="margin-top:2rem; padding:1.25rem 1.5rem; background:var(--sage-light); border-radius:var(--radius-md); font-size:15px; color:var(--ink-mid); line-height:1.7;">
+      <div style="margin-top:2rem; padding:1.25rem 1.5rem; background:white; border-radius:var(--radius-md); font-size:15px; color:var(--ink-mid); line-height:1.7; border:0.5px solid var(--border);">
         Pricing in every report is based on publicly available information and updated regularly. We always remind families to request a written itemized quote before committing — because pricing can change and we want you protected.
       </div>
 
@@ -548,37 +580,6 @@
       </div>
     </div>
   </div>
-
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="about-hero">
-      <div class="section-eyebrow">Our story</div>
-      <h1>Built for families,<br>not for profit.</h1>
-      <p>No family should have to navigate this alone, or be taken advantage of while doing it.</p>
-    </div>
-
-    <div class="about-body">
-      <div class="about-section">
-        <h2>About the Founder</h2>
-        <div style="display:flex; gap:2rem; align-items:flex-start; flex-wrap:wrap;">
-          <img src="https://i.imgur.com/92tycqq.jpeg" alt="John" style="width:120px; height:120px; border-radius:50%; object-fit:cover; object-position:center top; flex-shrink:0; border: 3px solid var(--sage-light);">
-          <p style="flex:1; min-width:220px;">My name is John, a computer science graduate of USC. When my beloved granddad passed away, our family was scammed out of thousands of dollars by a fraudulent funeral home. That experience never left me, and it's the reason I built Resting Place.</p>
-        </div>
-      </div>
-
-      <div class="about-section">
-        <h2>Our Standards</h2>
-        <div class="blacklist-box">
-          <p><strong>Any provider with a history of hidden fees, upcharging, or predatory practices is permanently blacklisted.</strong> No exceptions, regardless of what they offer to pay.</p>
-        </div>
-      </div>
-
-        <p style="margin-top:2rem;">
-          <button class="btn-primary" onclick="openForm()">Find a match for your loved one</button>
-        </p>
-      </div>
-    </div>
-  </section>
 
   <footer>
     <strong>Resting Place</strong> — A free service for families in need.<br><br>
