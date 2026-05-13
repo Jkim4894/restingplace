@@ -799,16 +799,17 @@
           })
         });
 
+        const makeParams = new URLSearchParams({
+            name: a.name || '', email: a.email || '', phone: a.contact || '',
+            relation: a.relation || '', timeline: a.timeline || '',
+            service_type: a.type || '', services_location: a.location || '',
+            budget: a.budget || '', religion: a.religion === 'Other' ? (a.religionOther || 'Other') : (a.religion || ''), notes: a.preferences || ''
+          });
         fetch('https://hook.us2.make.com/5mtrdtpqkjm47e6jhlzfocuantnbnbn7', {
           method: 'POST',
           mode: 'no-cors',
-          headers: { 'Content-Type': 'text/plain' },
-          body: JSON.stringify({
-            name: a.name, email: a.email, phone: a.contact,
-            relation: a.relation, timeline: a.timeline,
-            service_type: a.type, services_location: a.location,
-            budget: a.budget, religion: a.religion === 'Other' ? (a.religionOther || 'Other') : a.religion, notes: a.preferences
-          })
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: makeParams.toString()
         });
       } catch(e) { console.log('Submission error', e); }
 
