@@ -782,67 +782,43 @@
     function backStep() { collectFields(); state.step--; renderForm(); }
 
     async function submitForm() {
-  collectFields();
-  state.step = 'loading';
-  renderForm();
-  const a = state.answers;
+      collectFields();
+      state.step = 'loading';
+      renderForm();
+      const a = state.answers;
 
-  const payload = {
-    name: a.name || '',
-    email: a.email || '',
-    phone: a.contact || '',
-    relation: a.relation || '',
-    timeline: a.timeline || '',
-    service_type: a.type || '',
-    services_location: a.location || '',
-    budget: a.budget || '',
-    religion: a.religion === 'Other' ? (a.religionOther || 'Other') : (a.religion || ''),
-    notes: a.preferences || ''
-  };
+      const payload = {
+        name: a.name || '',
+        email: a.email || '',
+        phone: a.contact || '',
+        relation: a.relation || '',
+        timeline: a.timeline || '',
+        service_type: a.type || '',
+        services_location: a.location || '',
+        budget: a.budget || '',
+        religion: a.religion === 'Other' ? (a.religionOther || 'Other') : (a.religion || ''),
+        notes: a.preferences || ''
+      };
 
-  try {
-    await fetch('https://formspree.io/f/xlgzjryv', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-  } catch(e) { console.log('Formspree error', e); }
-
-  try {
-    await fetch('https://jkim4894.app.n8n.cloud/webhook-test/form-report', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-  } catch(e) { console.log('n8n error', e); }
-
-  state.resultText = `Hey ${a.name||'there'}, your request has been received and we are here to walk alongside you every step of the way. You will receive your personalized report by email shortly — you do not have to navigate this alone.`;
-  state.step = 'results';
-  renderForm();
-}
-Name: ${a.name||'there'}
-
-Write a single short 2 sentence message starting with "Hey ${a.name||'there'}," that:
-1. Confirms their request has been received and we are here to walk alongside them
-2. Reassures them they do not have to navigate this alone
-
-Do not mention sorry, loss, or death directly. Keep it warm, steady, and under 2 sentences.`;
-
+      // Send to Formspree for lead record backup
       try {
-        const resp = await fetch('https://api.anthropic.com/v1/messages', {
+        await fetch('https://formspree.io/f/xlgzjryv', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            model: 'claude-sonnet-4-20250514', max_tokens: 1000,
-            messages: [{ role: 'user', content: prompt }]
-          })
+          body: JSON.stringify(payload)
         });
-        const data = await resp.json();
-        state.resultText = data.content?.map(b => b.text||'').join('') ||
-          `Hey ${a.name||'there'}, your request has been received and we are here to walk alongside you every step of the way. During this incredibly difficult time, you do not have to navigate everything alone.`;
-      } catch(e) {
-        state.resultText = `Hey ${a.name||'there'}, your request has been received and we are here to walk alongside you every step of the way. During this incredibly difficult time, you do not have to navigate everything alone.`;
-      }
+      } catch(e) { console.log('Formspree error', e); }
+
+      // Send to n8n — triggers Claude report + PDF email
+      try {
+        await fetch('https://jkim4894.app.n8n.cloud/webhook-test/form-report', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+      } catch(e) { console.log('n8n error', e); }
+
+      state.resultText = `Hey ${a.name||'there'}, your request has been received and we are here to walk alongside you every step of the way. You will receive your personalized report by email shortly — you do not have to navigate this alone.`;
       state.step = 'results';
       renderForm();
     }
