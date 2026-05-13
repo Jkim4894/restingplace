@@ -782,46 +782,44 @@
     function backStep() { collectFields(); state.step--; renderForm(); }
 
     async function submitForm() {
-      collectFields();
-      state.step = 'loading';
-      renderForm();
-      const a = state.answers;
+  collectFields();
+  state.step = 'loading';
+  renderForm();
+  const a = state.answers;
 
-      try {
-        await fetch('https://formspree.io/f/xlgzjryv', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name: a.name, email: a.email, phone: a.contact,
-            relation: a.relation, timeline: a.timeline,
-            service_type: a.type, services_location: a.location,
-            budget: a.budget, religion: a.religion === 'Other' ? (a.religionOther || 'Other') : a.religion, notes: a.preferences
-          })
-        });
+  const payload = {
+    name: a.name || '',
+    email: a.email || '',
+    phone: a.contact || '',
+    relation: a.relation || '',
+    timeline: a.timeline || '',
+    service_type: a.type || '',
+    services_location: a.location || '',
+    budget: a.budget || '',
+    religion: a.religion === 'Other' ? (a.religionOther || 'Other') : (a.religion || ''),
+    notes: a.preferences || ''
+  };
 
-        await fetch("https://YOUR-N8N-DOMAIN/webhook/form-report", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    name: a.name,
-    email: a.email,
-    phone: a.contact,
-    relation: a.relation,
-    timeline: a.timeline,
-    servicetype: a.type,
-    serviceslocation: a.location,
-    budget: a.budget,
-    religion: a.religion === "Other" ? a.religionOther || "Other" : a.religion,
-    notes: a.preferences
-  })
-});
-        });
-      } catch(e) { console.log('Submission error', e); }
+  try {
+    await fetch('https://formspree.io/f/xlgzjryv', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+  } catch(e) { console.log('Formspree error', e); }
 
-      const prompt = `You are a compassionate concierge helping a grieving family find a burial or memorial site. No markdown. Write in plain sentences only.
+  try {
+    await fetch('https://YOUR-N8N-DOMAIN/webhook/form-report', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+  } catch(e) { console.log('n8n error', e); }
 
+  state.resultText = `Hey ${a.name||'there'}, your request has been received and we are here to walk alongside you every step of the way. You will receive your personalized report by email shortly — you do not have to navigate this alone.`;
+  state.step = 'results';
+  renderForm();
+}
 Name: ${a.name||'there'}
 
 Write a single short 2 sentence message starting with "Hey ${a.name||'there'}," that:
