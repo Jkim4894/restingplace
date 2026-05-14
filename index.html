@@ -15,6 +15,8 @@
       --ink-mid: #5a574f;
       --border: #e5e2dc;
       --bg: #f5f2ed;
+      --error: #c0392b;
+      --error-light: #fdf0ee;
       --radius-md: 10px;
       --radius-lg: 16px;
     }
@@ -255,6 +257,10 @@
       margin-bottom: 0.5rem; margin-top: 1.25rem; display: block;
     }
     .field-label:first-of-type { margin-top: 0; }
+
+    /* Required indicator */
+    .req { color: var(--sage); font-size: 11px; margin-left: 4px; }
+
     input[type="text"], input[type="email"], input[type="tel"], textarea {
       width: 100%; font-family: 'DM Sans', sans-serif; font-size: 16px;
       padding: 13px 15px; border: 0.5px solid var(--border);
@@ -262,7 +268,9 @@
       outline: none; transition: border-color 0.15s;
     }
     input:focus, textarea:focus { border-color: var(--sage-mid); }
+    input.field-error, textarea.field-error { border-color: var(--error); background: var(--error-light); }
     textarea { resize: vertical; min-height: 90px; }
+
     .option-grid {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
       gap: 10px; margin-top: 0.5rem;
@@ -273,8 +281,17 @@
     }
     .option-card:hover { border-color: var(--sage-mid); background: #f9faf8; }
     .option-card.selected { border-color: var(--sage); border-width: 1.5px; background: var(--sage-light); }
+    .option-grid.grid-error .option-card:not(.selected) { border-color: #e8b4b0; }
     .option-label { font-size: 15px; font-weight: 500; color: var(--ink); }
     .option-desc { font-size: 13px; color: var(--ink-mid); margin-top: 3px; line-height: 1.4; }
+
+    /* Inline error message */
+    .field-error-msg {
+      font-size: 13px; color: var(--error);
+      margin-top: 6px; display: flex; align-items: center; gap: 5px;
+    }
+    .field-error-msg::before { content: '↑'; font-size: 11px; }
+
     .nav-row {
       display: flex; justify-content: space-between; align-items: center;
       padding: 1.25rem 2.5rem 2rem; border-top: 0.5px solid var(--border); margin-top: 1.25rem;
@@ -341,16 +358,6 @@
     }
 
     /* ABOUT */
-    .about-hero {
-      background: linear-gradient(160deg, #f9f7f3 0%, #eef0ea 100%);
-      padding: 5rem 2rem 4rem; text-align: center;
-    }
-    .about-hero h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(36px, 5vw, 56px); font-weight: 300;
-      color: var(--ink); line-height: 1.2; margin-bottom: 1rem;
-    }
-    .about-hero p { font-size: 19px; color: var(--ink-mid); max-width: 540px; margin: 0 auto; line-height: 1.7; }
     .about-body { max-width: 740px; margin: 0 auto; padding: 4rem 2rem 5rem; }
     .about-section { margin-bottom: 3.5rem; }
     .about-section h2 {
@@ -359,24 +366,12 @@
       margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 0.5px solid var(--border);
     }
     .about-section p { font-size: 17px; color: var(--ink-mid); line-height: 1.85; margin-bottom: 1.1rem; }
-    .about-section p:last-child { margin-bottom: 0; }
     .blacklist-box {
       background: var(--sage-light); border-left: 3px solid var(--sage);
       border-radius: 0 var(--radius-md) var(--radius-md) 0;
       padding: 1.5rem 1.75rem; margin-top: 1.5rem;
     }
     .blacklist-box p { font-size: 16px; color: var(--ink); line-height: 1.75; margin: 0; }
-    .values-grid {
-      display: grid; grid-template-columns: repeat(2, 1fr);
-      gap: 1.25rem; margin-top: 1.5rem;
-    }
-    .value-card {
-      background: white; border: 0.5px solid var(--border);
-      border-radius: var(--radius-lg); padding: 1.5rem;
-    }
-    .value-icon { width: 28px; height: 28px; margin-bottom: 0.75rem; }
-    .value-title { font-size: 16px; font-weight: 500; color: var(--ink); margin-bottom: 0.4rem; }
-    .value-desc { font-size: 14px; color: var(--ink-mid); line-height: 1.6; }
 
     /* FOOTER */
     footer {
@@ -483,9 +478,8 @@
 
   <hr class="section-divider">
 
-  <!-- ABOUT — white background, comes first after home -->
   <section id="about" style="background:white;">
-    <div class="about-body" style="max-width:740px; margin:0 auto; padding:4rem 2rem 5rem;">
+    <div class="about-body">
       <div class="about-section">
         <div class="section-eyebrow">Our story</div>
         <h2 style="font-family:'Cormorant Garamond',serif; font-size:clamp(32px,5vw,48px); font-weight:300; color:var(--ink); margin-bottom:1.5rem;">Built for families,<br>not for profit.</h2>
@@ -499,14 +493,12 @@
           </div>
         </div>
       </div>
-
       <div class="about-section" style="margin-top:3rem;">
-        <h2 style="font-family:'Cormorant Garamond',serif; font-size:32px; font-weight:400; color:var(--ink); margin-bottom:1rem; padding-bottom:0.75rem; border-bottom:0.5px solid var(--border);">Our Standards</h2>
+        <h2>Our Standards</h2>
         <div class="blacklist-box">
           <p><strong>Any provider with a history of hidden fees, upcharging, or predatory practices is permanently blacklisted.</strong> No exceptions.</p>
         </div>
       </div>
-
       <p style="margin-top:2.5rem;">
         <button class="btn-primary" onclick="openForm()">Find a match for your loved one</button>
       </p>
@@ -515,12 +507,10 @@
 
   <hr class="section-divider">
 
-  <!-- HOW IT WORKS — warm gradient background, comes after About -->
   <section id="how" style="background:linear-gradient(160deg,#f9f7f3 0%,#eef0ea 100%);">
     <div class="section">
       <div class="section-eyebrow">The process</div>
       <h2>Simple, gentle,<br>and completely free.</h2>
-
       <div class="step-row">
         <div class="step-number">01</div>
         <div class="step-content">
@@ -549,11 +539,9 @@
           <p>Contact any provider when you're ready. We're here if you have questions.</p>
         </div>
       </div>
-
       <div style="margin-top:2rem; padding:1.25rem 1.5rem; background:white; border-radius:var(--radius-md); font-size:15px; color:var(--ink-mid); line-height:1.7; border:0.5px solid var(--border);">
         Pricing in every report is based on publicly available information and updated regularly. We always remind families to request a written itemized quote before committing — because pricing can change and we want you protected.
       </div>
-
       <div class="hiw-cta">
         <div class="hiw-cta-text">
           <h3>Ready to find the right place?</h3>
@@ -593,32 +581,23 @@
       document.body.style.overflow = 'hidden';
       renderForm();
     }
-
     function closeForm() {
       document.getElementById('form-overlay').classList.remove('active');
       document.body.style.overflow = '';
     }
-
     function scrollToSection(id) {
       const el = document.getElementById(id);
       if (!el) return;
-      const navHeight = 64;
-      const top = el.getBoundingClientRect().top + window.scrollY - navHeight;
+      const top = el.getBoundingClientRect().top + window.scrollY - 64;
       window.scrollTo({ top, behavior: 'smooth' });
     }
+    function toggleMenu() { document.getElementById('nav-links').classList.toggle('open'); }
+    function closeMenu() { document.getElementById('nav-links').classList.remove('open'); }
 
-    function toggleMenu() {
-      document.getElementById('nav-links').classList.toggle('open');
-    }
-
-    function closeMenu() {
-      document.getElementById('nav-links').classList.remove('open');
-    }
-
-    // FORM
     const state = {
       step: 0,
-      answers: { name:'',relation:'',timeline:'',type:'',religion:'',religionOther:'',location:'',outOfState:'',locationRemote:'',budget:'',preferences:'',contact:'',email:'' },
+      answers: { name:'',relation:'',timeline:'',type:'',religion:'',religionOther:'',location:'',budget:'',preferences:'',contact:'',email:'' },
+      errors: {},
       resultText: ''
     };
 
@@ -634,23 +613,34 @@
       return `<div class="progress-bar">${bars}<span class="progress-label">Step ${state.step + 1} of ${STEPS.length}</span></div>`;
     }
 
+    function errMsg(field, msg) {
+      return state.errors[field] ? `<div class="field-error-msg">${msg}</div>` : '';
+    }
+
     function renderStep0() {
       return `${renderProgress()}
         <div class="step-body">
           <div class="step-title">Tell us a little about yourself</div>
           <div class="step-sub">We're here to help. There are no wrong answers.</div>
-          <label class="field-label">Your name</label>
-          <input type="text" id="f-name" placeholder="Your first name" value="${state.answers.name}">
-          <label class="field-label" style="margin-top:1.25rem">Your relationship to your loved one</label>
-          <div class="option-grid">
+
+          <label class="field-label">Your name <span class="req">required</span></label>
+          <input type="text" id="f-name" placeholder="Your first name" value="${state.answers.name}"
+            class="${state.errors.name ? 'field-error' : ''}">
+          ${errMsg('name', 'Please enter your name so we can personalise your report')}
+
+          <label class="field-label" style="margin-top:1.25rem">Your relationship to your loved one <span class="req">required</span></label>
+          <div class="option-grid ${state.errors.relation ? 'grid-error' : ''}">
             ${[['Spouse / partner','Partner'],['Child','Child'],['Parent','Parent'],['Sibling','Sibling'],['Friend','Friend'],['Other','Other']].map(([l,v])=>
               `<div class="option-card ${state.answers.relation===v?'selected':''}" onclick="pick('relation','${v}',this)"><div class="option-label">${l}</div></div>`).join('')}
           </div>
-          <label class="field-label" style="margin-top:1.25rem">How soon do you need arrangements?</label>
-          <div class="option-grid">
+          ${errMsg('relation', 'Please select your relationship')}
+
+          <label class="field-label" style="margin-top:1.25rem">How soon do you need arrangements? <span class="req">required</span></label>
+          <div class="option-grid ${state.errors.timeline ? 'grid-error' : ''}">
             ${[['Immediately','Immediate'],['Within a week','Week'],['Within a month','Month'],['Planning ahead','Advance']].map(([l,v])=>
               `<div class="option-card ${state.answers.timeline===v?'selected':''}" onclick="pick('timeline','${v}',this)"><div class="option-label">${l}</div></div>`).join('')}
           </div>
+          ${errMsg('timeline', 'Please select a timeline')}
         </div>
         <div class="nav-row"><span></span><button class="btn-next" onclick="nextStep()">Continue →</button></div>`;
     }
@@ -666,14 +656,15 @@
       ];
       return `${renderProgress()}
         <div class="step-body">
-          <div class="step-title">What type of service?</div>
+          <div class="step-title">What type of service? <span class="req" style="font-family:'DM Sans',sans-serif; font-size:12px;">required</span></div>
           <div class="step-sub">Select whatever feels right — or choose "Not sure yet" and we'll guide you.</div>
-          <div class="option-grid">
+          <div class="option-grid ${state.errors.type ? 'grid-error' : ''}">
             ${types.map(([l,v,d])=>
               `<div class="option-card ${state.answers.type===v?'selected':''}" onclick="pick('type','${v}',this)">
                 <div class="option-label">${l}</div><div class="option-desc">${d}</div>
               </div>`).join('')}
           </div>
+          ${errMsg('type', 'Please select a service type to continue')}
         </div>
         <div class="nav-row"><button class="btn-back" onclick="backStep()">← Back</button><button class="btn-next" onclick="nextStep()">Continue →</button></div>`;
     }
@@ -683,14 +674,20 @@
         <div class="step-body">
           <div class="step-title">A few more details</div>
           <div class="step-sub">This helps us find options that truly fit your family's needs.</div>
-          <label class="field-label">Where do services need to be arranged?</label>
-          <input type="text" id="f-loc" placeholder="e.g. Los Angeles, CA or 90210" value="${state.answers.location}" onblur="onLocationBlur(this)">
-          <label class="field-label" style="margin-top:1.25rem">Approximate budget</label>
-          <div class="option-grid">
+
+          <label class="field-label">Where do services need to be arranged? <span class="req">required</span></label>
+          <input type="text" id="f-loc" placeholder="e.g. Los Angeles, CA or 90210" value="${state.answers.location}"
+            class="${state.errors.location ? 'field-error' : ''}">
+          ${errMsg('location', 'Please enter a city, state, or ZIP code so we can find nearby providers')}
+
+          <label class="field-label" style="margin-top:1.25rem">Approximate budget <span class="req">required</span></label>
+          <div class="option-grid ${state.errors.budget ? 'grid-error' : ''}">
             ${[['Under $3,000','Under3k'],['$3,000–$8,000','3k8k'],['$8,000–$15,000','8k15k'],['$15,000+','15kPlus'],['Not sure','Unsure']].map(([l,v])=>
               `<div class="option-card ${state.answers.budget===v?'selected':''}" onclick="pick('budget','${v}',this)"><div class="option-label">${l}</div></div>`).join('')}
           </div>
-          <label class="field-label" style="margin-top:1.25rem">Religious or cultural tradition</label>
+          ${errMsg('budget', 'Please select a budget range')}
+
+          <label class="field-label" style="margin-top:1.25rem">Religious or cultural tradition <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:12px;">(optional)</span></label>
           <div class="option-grid">
             ${[['Catholic','Catholic'],['Jewish','Jewish'],['Muslim','Muslim'],['Buddhist','Buddhist'],['Non-religious','None'],['Other','Other']].map(([l,v])=>
               `<div class="option-card ${state.answers.religion===v?'selected':''}" onclick="pickAndRender('religion','${v}',this)"><div class="option-label">${l}</div></div>`).join('')}
@@ -699,8 +696,9 @@
           <label class="field-label" style="margin-top:1rem">Please specify your tradition</label>
           <input type="text" id="f-religion-other" placeholder="e.g. Hindu, Greek Orthodox, Sikh..." value="${state.answers.religionOther||''}">
           ` : ''}
-          <label class="field-label" style="margin-top:1.25rem">Anything else we should know? <span style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
-          <textarea id="f-pref" placeholder="e.g. specific county or city needed, working with a charity, no family available, veteran status, wheelchair accessible...">${state.answers.preferences}</textarea>
+
+          <label class="field-label" style="margin-top:1.25rem">Anything else we should know? <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:12px;">(optional)</span></label>
+          <textarea id="f-pref" placeholder="e.g. specific county or city needed, veteran status, no family available, wheelchair accessible...">${state.answers.preferences}</textarea>
         </div>
         <div class="nav-row"><button class="btn-back" onclick="backStep()">← Back</button><button class="btn-next" onclick="nextStep()">Continue →</button></div>`;
     }
@@ -709,10 +707,14 @@
       return `${renderProgress()}
         <div class="step-body">
           <div class="step-title">How should we reach you?</div>
-          <div class="step-sub">We'll send your matches by email within the hour. No spam — ever.</div>
-          <label class="field-label">Your email address</label>
-          <input type="email" id="f-email" placeholder="you@example.com" value="${state.answers.email}">
-          <label class="field-label" style="margin-top:1.25rem">Phone number <span style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
+          <div class="step-sub">We'll send your matches by email within a few hours. No spam — ever.</div>
+
+          <label class="field-label">Your email address <span class="req">required</span></label>
+          <input type="email" id="f-email" placeholder="you@example.com" value="${state.answers.email}"
+            class="${state.errors.email ? 'field-error' : ''}">
+          ${errMsg('email', 'Please enter a valid email address so we can send your report')}
+
+          <label class="field-label" style="margin-top:1.25rem">Phone number <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:12px;">(optional)</span></label>
           <input type="tel" id="f-phone" placeholder="+1 (555) 000-0000" value="${state.answers.contact}">
         </div>
         <div class="nav-row"><button class="btn-back" onclick="backStep()">← Back</button><button class="btn-next" onclick="submitForm()">Find my matches →</button></div>`;
@@ -745,30 +747,54 @@
       <div class="disclaimer">Pricing in reports is based on publicly available information and may vary. Always request a written itemized quote before committing to any provider.<br><br>Your personal information is kept private and never sold or shared.</div>`;
     }
 
+    // Validation per step
+    function validate() {
+      state.errors = {};
+      if (state.step === 0) {
+        if (!state.answers.name.trim()) state.errors.name = true;
+        if (!state.answers.relation) state.errors.relation = true;
+        if (!state.answers.timeline) state.errors.timeline = true;
+      }
+      if (state.step === 1) {
+        if (!state.answers.type) state.errors.type = true;
+      }
+      if (state.step === 2) {
+        if (!state.answers.location.trim()) state.errors.location = true;
+        if (!state.answers.budget) state.errors.budget = true;
+      }
+      if (state.step === 3) {
+        const e = state.answers.email.trim();
+        if (!e || !e.includes('@') || !e.includes('.')) state.errors.email = true;
+      }
+      return Object.keys(state.errors).length === 0;
+    }
+
     function pick(field, value, el) {
       state.answers[field] = value;
+      // Clear error for this field on selection
+      delete state.errors[field];
       el.closest('.option-grid').querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
       el.classList.add('selected');
+      // Re-render just the error state without full re-render for smoothness
+      const grid = el.closest('.option-grid');
+      if (grid) grid.classList.remove('grid-error');
+      const nextSibling = grid.nextElementSibling;
+      if (nextSibling && nextSibling.classList.contains('field-error-msg')) nextSibling.remove();
     }
 
     function pickAndRender(field, value, el) {
       const loc = sel('f-loc'); if(loc) state.answers.location = loc.value;
-      const locR = sel('f-loc-remote'); if(locR) state.answers.locationRemote = locR.value;
       const pref = sel('f-pref'); if(pref) state.answers.preferences = pref.value;
       state.answers[field] = value;
       renderForm();
     }
 
-    function onLocationBlur(el) {
-      state.answers.location = el.value;
-      if (state.answers.location.trim()) renderForm();
-    }
-
     function collectFields() {
-      if (state.step === 0) { const n = sel('f-name'); if(n) state.answers.name = n.value; }
+      if (state.step === 0) {
+        const n = sel('f-name'); if(n) state.answers.name = n.value;
+      }
       if (state.step === 2) {
         const l = sel('f-loc'); if(l) state.answers.location = l.value;
-        const lr = sel('f-loc-remote'); if(lr) state.answers.locationRemote = lr.value;
         const ro = sel('f-religion-other'); if(ro) state.answers.religionOther = ro.value;
         const p = sel('f-pref'); if(p) state.answers.preferences = p.value;
       }
@@ -778,11 +804,28 @@
       }
     }
 
-    function nextStep() { collectFields(); state.step++; renderForm(); }
-    function backStep() { collectFields(); state.step--; renderForm(); }
+    function nextStep() {
+      collectFields();
+      if (!validate()) {
+        renderForm();
+        // Scroll to first error
+        setTimeout(() => {
+          const firstErr = document.querySelector('.field-error, .grid-error, .field-error-msg');
+          if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 50);
+        return;
+      }
+      state.errors = {};
+      state.step++;
+      renderForm();
+    }
+
+    function backStep() { collectFields(); state.errors = {}; state.step--; renderForm(); }
 
     async function submitForm() {
       collectFields();
+      if (!validate()) { renderForm(); return; }
+
       state.step = 'loading';
       renderForm();
       const a = state.answers;
@@ -800,7 +843,6 @@
         notes: a.preferences || ''
       };
 
-      // Send to Formspree for lead record backup
       try {
         await fetch('https://formspree.io/f/xlgzjryv', {
           method: 'POST',
@@ -809,7 +851,6 @@
         });
       } catch(e) { console.log('Formspree error', e); }
 
-      // Send to n8n — triggers Claude report + PDF email
       try {
         await fetch('https://jkim4894.app.n8n.cloud/webhook-test/form-report', {
           method: 'POST',
@@ -825,7 +866,8 @@
 
     function restartForm() {
       state.step = 0;
-      state.answers = { name:'',relation:'',timeline:'',type:'',religion:'',religionOther:'',location:'',outOfState:'',locationRemote:'',budget:'',preferences:'',contact:'',email:'' };
+      state.errors = {};
+      state.answers = { name:'',relation:'',timeline:'',type:'',religion:'',religionOther:'',location:'',budget:'',preferences:'',contact:'',email:'' };
       state.resultText = '';
       renderForm();
     }
